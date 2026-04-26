@@ -388,7 +388,7 @@ body {
   --muted-ui: #f3f4f6;
   --muted-foreground: #4b5563;
   --border: #d1d5db;
-  --primary: #f97316;
+  --primary: #111827;
   --primary-foreground: #ffffff;
   --gold: #1f2937;
   --gold2: #111827;
@@ -501,12 +501,13 @@ h3 {
 }
 
 .btn-primary {
-  background: #f97316;
-  border: 1px solid #ea580c;
+  background: #111827;
+  border: 1px solid #111827;
 }
 
 .btn-primary:hover {
-  background: #ea580c;
+  background: #1f2937;
+  border-color: #1f2937;
 }
 
 .btn-outline {
@@ -578,6 +579,73 @@ h3 {
   font-weight: 600;
   letter-spacing: 0.08em;
   color: #374151;
+}
+
+/* Neutralize remaining semantic/accent classes to grayscale */
+.tag--gold,
+.tag--orange,
+.tag--teal,
+.tag--green,
+.tag--red,
+.doc-status.ready,
+.doc-status.pending,
+.arch-box,
+.arch-box.gold,
+.arch-box.green,
+.arch-box.red,
+.pipe-icon.gold,
+.pipe-icon.teal,
+.pipe-icon.green,
+.pipe-icon.red,
+.dot-outer,
+.dot-outer.teal,
+.dot-outer.green,
+.dot-outer.red,
+.dot-outer .dot-inner,
+.dot-outer.teal .dot-inner,
+.dot-outer.green .dot-inner,
+.dot-outer.red .dot-inner,
+.slide-thumb.t1,
+.slide-thumb.t2,
+.slide-thumb.t3,
+.slide-thumb.t4,
+.gap-card,
+.gap-card.sol,
+.rp-box,
+.sup-card,
+.sup-icon,
+.method-tab.active,
+.hero-badge-dot,
+.av1,
+.av2,
+.av3,
+.av4 {
+  background: #f3f4f6 !important;
+  border-color: #d1d5db !important;
+  color: #374151 !important;
+  box-shadow: none !important;
+}
+
+.tl-dot .dot-inner {
+  background: #6b7280 !important;
+}
+
+/* Convert hardcoded inline accent blocks in component area to grayscale */
+#components [style*="rgba(249,115,22"],
+#components [style*="rgba(16,185,129"],
+#components [style*="rgba(239,68,68"],
+#components [style*="color:var(--green)"],
+#components [style*="color:var(--red)"],
+#components [style*="color:var(--gold)"],
+#components [style*="color:var(--teal)"] {
+  background: #f9fafb !important;
+  border-color: #d1d5db !important;
+  color: #374151 !important;
+}
+
+#components h3[style*="color:var("],
+#components h4[style*="color:var("] {
+  color: #111827 !important;
 }
 
 p,
@@ -1675,14 +1743,14 @@ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 /* ── Gantt Chart ── */
 const tasks=[
-  {label:'Requirements & Design',start:0,end:1,color:'#f97316'},
-  {label:'Data Collection',start:0,end:2,color:'#f97316'},
-  {label:'Model Development (C1&C2)',start:1,end:3,color:'#f97316'},
-  {label:'Price Prediction (C3)',start:1,end:4,color:'#ef4444'},
-  {label:'Supplier Dashboard (C4)',start:2,end:5,color:'#10b981'},
-  {label:'System Integration',start:4,end:6,color:'#f97316'},
-  {label:'Testing & Evaluation',start:5,end:7,color:'#10b981'},
-  {label:'Report Writing',start:6,end:7,color:'#f97316'},
+  {label:'Requirements & Design',start:0,end:1,color:'#4b5563'},
+  {label:'Data Collection',start:0,end:2,color:'#6b7280'},
+  {label:'Model Development (C1&C2)',start:1,end:3,color:'#4b5563'},
+  {label:'Price Prediction (C3)',start:1,end:4,color:'#374151'},
+  {label:'Supplier Dashboard (C4)',start:2,end:5,color:'#6b7280'},
+  {label:'System Integration',start:4,end:6,color:'#4b5563'},
+  {label:'Testing & Evaluation',start:5,end:7,color:'#6b7280'},
+  {label:'Report Writing',start:6,end:7,color:'#374151'},
 ];
 const gantt=document.getElementById('gantt-rows');
 tasks.forEach(t=>{
