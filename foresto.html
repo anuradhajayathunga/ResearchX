@@ -376,30 +376,30 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
 
 body {
   background:
-    radial-gradient(circle at 0% 0%, rgba(14, 116, 144, 0.08) 0%, rgba(14, 116, 144, 0) 35%),
-    radial-gradient(circle at 100% 100%, rgba(15, 118, 110, 0.08) 0%, rgba(15, 118, 110, 0) 35%),
-    #f7fafc;
+    radial-gradient(circle at 0% 0%, rgba(148, 163, 184, 0.12) 0%, rgba(148, 163, 184, 0) 38%),
+    radial-gradient(circle at 100% 100%, rgba(203, 213, 225, 0.2) 0%, rgba(203, 213, 225, 0) 36%),
+    #f8fafc;
   color: #0f172a;
   line-height: 1.75;
 }
 
 :root {
-  --background: #f7fafc;
+  --background: #f8fafc;
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
-  --muted-ui: #eef2f7;
+  --muted-ui: #f1f5f9;
   --muted-foreground: #475569;
-  --border: #dbe3ee;
+  --border: #e2e8f0;
   --primary: #f97316;
   --primary-foreground: #ffffff;
   --gold: #f97316;
   --gold2: #ea580c;
   --orange: #c2410c;
-  --teal: #ea580c;
-  --teal2: #ffedd5;
+  --teal: #334155;
+  --teal2: #e2e8f0;
   --glass: rgba(255, 255, 255, 0.9);
-  --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
   --radius: 14px;
 }
 
@@ -439,8 +439,18 @@ h4 {
 
 #nav {
   background: rgba(255, 255, 255, 0.92);
-  border-bottom: 1px solid #e3e8ef;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.nav-links a {
+  color: #475569;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #0f172a;
+  background: #f1f5f9;
 }
 
 .nav-logo-mark {
@@ -471,8 +481,8 @@ h4 {
 .contact-form,
 .arch-diagram {
   border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
-  border: 1px solid #e3e8ef;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  border: 1px solid #e2e8f0;
 }
 
 .btn {
@@ -495,15 +505,21 @@ h4 {
 }
 
 .btn-outline:hover {
-  border-color: #ea580c;
-  color: #ea580c;
-  background: #fff7ed;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  background: #f8fafc;
 }
 
 .btn-teal {
-  color: #ea580c;
-  border-color: #fdba74;
-  background: #fff7ed;
+  color: #334155;
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.btn-teal:hover {
+  color: #0f172a;
+  border-color: #94a3b8;
+  background: #f1f5f9;
 }
 
 .hero-grid,
@@ -519,14 +535,36 @@ h4 {
 .team-card .team-role,
 .contact-detail-icon,
 .footer-right a:hover {
-  color: #ea580c;
+  color: #334155;
+}
+
+.hero h1 .accent {
+  color: #f97316;
+}
+
+.hero h1 .accent2 {
+  color: #0f172a;
 }
 
 .stat-num.g,
 .stat-num.t,
 .stat-num.gr,
 .stat-num.r {
-  color: #f97316;
+  color: #334155;
+}
+
+.tag,
+.tech-pill,
+.doc-icon,
+.doc-status,
+.nav-id {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #64748b;
+}
+
+.section-label {
+  font-weight: 600;
 }
 
 #domain,
