@@ -7,33 +7,94 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ─── TOKENS ─────────────────────────────────────── */
-:root{
-  --navy:#f6f9fc;
-  --navy2:#edf3f8;
-  --navy3:#e3ecf5;
-  --gold:#c57f15;
-  --gold2:#d99b3d;
-  --orange:#d4770b;
-  --white:#ffffff;
-  --teal:#0a93a8;
-  --teal2:#7ecdd9;
-  --red:#c23f4a;
-  --green:#198f69;
-  --text:#1a2d40;
-  --muted:#5e6f82;
-  --border:rgba(26,45,64,0.14);
-  --card:rgba(255,255,255,0.88);
-  --card-hover:rgba(255,255,255,1);
-  --glass:rgba(255,255,255,0.84);
-  --radius:14px;
-  --shadow:0 12px 40px rgba(37,64,90,0.1);
+:root {
+  --radius: 0.5rem;
+
+  /* Neutral, modern base */
+  --background: #f9fafb;
+  /* gray-50 */
+  --foreground: #111827;
+  /* gray-900 */
+
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+
+  /* Restaurant Primary (Orange) */
+  --primary: #f97316;
+  /* orange-500 */
+  --primary-foreground: #ffffff;
+
+  --secondary: #ff4136;
+  /* gray-100 */
+  --secondary-foreground: #111827;
+
+  --muted-ui: #f3f4f6;
+  --muted-foreground: #6b7280;
+  /* gray-500 */
+  --accent: #f3f4f6;
+  --accent-foreground: #111827;
+
+  --destructive: #ef4444;
+  /* red-500 */
+  --destructive-foreground: #ffffff;
+
+  --border: #e5e7eb;
+  /* gray-200 */
+  --input: #e5e7eb;
+  --ring: #f97316;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #f97316;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3f4f6;
+  --sidebar-accent-foreground: #111827;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #f97316;
+
+  /* Extra Restaurant Tokens (Mapped to JS values) */
+  --restaurant-primary: #f97316;
+  --restaurant-primary-dark: #ea580c;
+  /* orange-600 */
+  --restaurant-primary-light: #fdba74;
+  /* orange-300 */
+  --restaurant-sidebar-bg: #1f2937;
+  /* gray-800 */
+  --restaurant-sidebar-hover: #374151;
+  /* gray-700 */
+  --restaurant-success: #10b981;
+  /* green-500 */
+  --restaurant-warning: #f59e0b;
+  /* amber-500 */
+  --restaurant-error: #ef4444;
+  /* red-500 */
+
+  /* Existing site aliases */
+  --navy: var(--background);
+  --navy2: var(--muted-ui);
+  --navy3: #eceff3;
+  --gold: var(--primary);
+  --gold2: var(--restaurant-primary-light);
+  --orange: var(--restaurant-primary-dark);
+  --white: #ffffff;
+  --teal: var(--primary);
+  --teal2: var(--restaurant-primary-light);
+  --red: var(--destructive);
+  --green: var(--restaurant-success);
+  --text: var(--foreground);
+  --muted: var(--muted-foreground);
+  --card-hover: #ffffff;
+  --glass: rgba(255, 255, 255, 0.92);
+  --shadow: 0 12px 40px rgba(17, 24, 39, 0.1);
 }
 
 /* ─── RESET ──────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
-body{background:linear-gradient(180deg,#f9fcff 0%,#f4f8fc 45%,#eef4fa 100%);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;overflow-x:hidden}
+body{background:linear-gradient(180deg,var(--background) 0%,#ffffff 45%,var(--muted-ui) 100%);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 
@@ -41,11 +102,11 @@ a{color:inherit;text-decoration:none}
 .container{max-width:1120px;margin:0 auto;padding:0 2rem}
 .section{padding:6.25rem 0}
 .tag{display:inline-block;font-size:.72rem;font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .75rem;border-radius:100px;border:1px solid var(--border)}
-.tag--gold{color:var(--gold);border-color:rgba(232,160,32,.35);background:rgba(232,160,32,.08)}
+.tag--gold{color:var(--gold);border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.08)}
 .tag--orange{color:var(--orange);border-color:rgba(235, 88, 14, 0.35);background:rgba(245, 235, 230, 0.08)}
-.tag--teal{color:var(--teal);border-color:rgba(0,180,216,.35);background:rgba(0,180,216,.08)}
-.tag--green{color:var(--green);border-color:rgba(6,214,160,.35);background:rgba(6,214,160,.08)}
-.tag--red{color:var(--red);border-color:rgba(230,57,70,.35);background:rgba(230,57,70,.08)}
+.tag--teal{color:var(--teal);border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.08)}
+.tag--green{color:var(--green);border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08)}
+.tag--red{color:var(--red);border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08)}
 .section-label{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
 h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.16;letter-spacing:.01em}
 h2{font-size:clamp(1.9rem,3.4vw,2.45rem)}
@@ -56,9 +117,9 @@ p{color:var(--muted);line-height:1.72;max-width:68ch}
 .btn-primary{background:var(--gold);color:var(--white)}
 .btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
 .btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
-.btn-outline:hover{border-color:var(--teal);color:var(--teal);background:rgba(0,180,216,.07)}
-.btn-teal{background:rgba(0,180,216,.15);border:1px solid rgba(0,180,216,.35);color:var(--teal)}
-.btn-teal:hover{background:rgba(0,180,216,.25)}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);background:rgba(249,115,22,.07)}
+.btn-teal{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.35);color:var(--teal)}
+.btn-teal:hover{background:rgba(249,115,22,.25)}
 
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:.25s;backdrop-filter:blur(6px)}
 .card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:var(--shadow)}
@@ -128,10 +189,10 @@ p{color:var(--muted);line-height:1.72;max-width:68ch}
 .gap-card.sol{background:rgba(25,143,105,.05);border-color:rgba(25,143,105,.2)}
 .gap-card.sol h4{color:var(--green)}
 
-.rp-box{background:rgba(232,160,32,.06);border:1px solid rgba(232,160,32,.2);border-radius:var(--radius);padding:2.5rem;margin-top:3rem;position:relative}
+.rp-box{background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);border-radius:var(--radius);padding:2.5rem;margin-top:3rem;position:relative}
 .rp-box h3{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:1rem}
 .rp-box p{font-size:1rem;font-style:italic;color:var(--text)}
-.q-mark{font-family:'Playfair Display',serif;font-size:5rem;color:rgba(232,160,32,.12);position:absolute;top:1rem;right:2rem;line-height:1}
+.q-mark{font-family:'Playfair Display',serif;font-size:5rem;color:rgba(249,115,22,.12);position:absolute;top:1rem;right:2rem;line-height:1}
 
 /* ─── COMPONENTS ─────────────────────────────────── */
 #domain .section-sub{background:var(--navy3);border-radius:var(--radius);padding:3rem;margin-top:4rem;border:1px solid var(--border)}
@@ -161,33 +222,33 @@ p{color:var(--muted);line-height:1.72;max-width:68ch}
 
 /* metrics table */
 .metrics-table{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:.85rem}
-.metrics-table th{background:rgba(0,180,216,.1);color:var(--teal);font-weight:600;padding:.7rem 1rem;text-align:left;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em}
+.metrics-table th{background:rgba(249,115,22,.1);color:var(--teal);font-weight:600;padding:.7rem 1rem;text-align:left;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em}
 .metrics-table td{padding:.65rem 1rem;border-bottom:1px solid var(--border)}
-.metrics-table tr.highlight td{background:rgba(232,160,32,.08);color:var(--gold)}
+.metrics-table tr.highlight td{background:rgba(249,115,22,.08);color:var(--gold)}
 
 /* arch diagram */
 .arch-diagram{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-top:2rem;text-align:center;font-size:.82rem}
 .arch-row{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin:.75rem 0;align-items:center}
-.arch-box{background:rgba(0,180,216,.1);border:1px solid rgba(0,180,216,.3);border-radius:8px;padding:.6rem 1rem;color:var(--teal);font-family:'DM Mono',monospace;font-size:.72rem;white-space:nowrap}
-.arch-box.gold{background:rgba(232,160,32,.1);border-color:rgba(232,160,32,.3);color:var(--gold)}
-.arch-box.green{background:rgba(6,214,160,.1);border-color:rgba(6,214,160,.3);color:var(--green)}
-.arch-box.red{background:rgba(230,57,70,.1);border-color:rgba(230,57,70,.3);color:var(--red)}
+.arch-box{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:8px;padding:.6rem 1rem;color:var(--teal);font-family:'DM Mono',monospace;font-size:.72rem;white-space:nowrap}
+.arch-box.gold{background:rgba(249,115,22,.1);border-color:rgba(249,115,22,.3);color:var(--gold)}
+.arch-box.green{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:var(--green)}
+.arch-box.red{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:var(--red)}
 .arch-arrow{color:var(--muted);font-size:1.2rem}
 
 /* ─── METHODOLOGY ────────────────────────────────── */
 #methodology{background:var(--navy)}
 .method-tabs{display:flex;gap:.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
 .method-tab{padding:.55rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:.2s;font-family:'DM Sans',sans-serif}
-.method-tab.active{background:rgba(0,180,216,.12);border-color:rgba(0,180,216,.4);color:var(--teal)}
+.method-tab.active{background:rgba(249,115,22,.12);border-color:rgba(249,115,22,.4);color:var(--teal)}
 .method-panel{display:none}
 .method-panel.active{display:block}
 .pipeline{display:flex;flex-direction:column;gap:.5rem;position:relative}
 .pipeline-step{display:grid;grid-template-columns:40px 1fr;gap:1rem;align-items:start}
 .pipe-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;position:relative;z-index:1}
-.pipe-icon.gold{background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.4)}
-.pipe-icon.teal{background:rgba(0,180,216,.15);border:1px solid rgba(0,180,216,.4)}
-.pipe-icon.green{background:rgba(6,214,160,.15);border:1px solid rgba(6,214,160,.4)}
-.pipe-icon.red{background:rgba(230,57,70,.15);border:1px solid rgba(230,57,70,.4)}
+.pipe-icon.gold{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4)}
+.pipe-icon.teal{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4)}
+.pipe-icon.green{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4)}
+.pipe-icon.red{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4)}
 .pipe-content{padding-bottom:2rem}
 .pipe-content h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.4rem}
 .pipe-content p{font-size:.9rem;color:var(--muted);line-height:1.65}
@@ -218,8 +279,8 @@ p{color:var(--muted);line-height:1.72;max-width:68ch}
 .doc-icon{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border);border-radius:999px;padding:.25rem .6rem;color:var(--muted)}
 .doc-title{font-family:'Playfair Display',serif;font-size:.95rem}
 .doc-status{font-family:'DM Mono',monospace;font-size:.68rem;padding:.2rem .5rem;border-radius:4px}
-.doc-status.ready{background:rgba(6,214,160,.12);color:var(--green)}
-.doc-status.pending{background:rgba(232,160,32,.12);color:var(--gold)}
+.doc-status.ready{background:rgba(16,185,129,.12);color:var(--green)}
+.doc-status.pending{background:rgba(249,115,22,.12);color:var(--gold)}
 .doc-actions{margin-top:auto;display:flex;gap:.5rem;flex-wrap:wrap}
 
 /* ─── PRESENTATIONS ──────────────────────────────── */
@@ -227,10 +288,10 @@ p{color:var(--muted);line-height:1.72;max-width:68ch}
 .slides-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:2.5rem}
 .slide-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .slide-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:.08em;color:var(--muted);position:relative}
-.slide-thumb.t1{background:linear-gradient(135deg,rgba(232,160,32,.15),rgba(0,180,216,.15))}
-.slide-thumb.t2{background:linear-gradient(135deg,rgba(0,180,216,.15),rgba(6,214,160,.15))}
-.slide-thumb.t3{background:linear-gradient(135deg,rgba(6,214,160,.15),rgba(232,160,32,.15))}
-.slide-thumb.t4{background:linear-gradient(135deg,rgba(230,57,70,.1),rgba(232,160,32,.15))}
+.slide-thumb.t1{background:linear-gradient(135deg,rgba(249,115,22,.15),rgba(249,115,22,.15))}
+.slide-thumb.t2{background:linear-gradient(135deg,rgba(249,115,22,.15),rgba(16,185,129,.15))}
+.slide-thumb.t3{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(249,115,22,.15))}
+.slide-thumb.t4{background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(249,115,22,.15))}
 .slide-info{padding:1.25rem}
 .slide-info h4{font-family:'Playfair Display',serif;font-size:.95rem;margin-bottom:.3rem}
 .slide-info p{font-size:.9rem;color:var(--muted);line-height:1.65}
@@ -250,8 +311,8 @@ p{color:var(--muted);line-height:1.72;max-width:68ch}
 .team-card .team-role{font-size:.9rem;color:var(--teal);margin:.4rem 0}
 .team-card .team-email{font-size:.9rem;color:var(--muted)}
 .supervisor-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem}
-.sup-card{background:rgba(0,180,216,.05);border:1px solid rgba(0,180,216,.15);border-radius:var(--radius);padding:1.5rem;display:flex;align-items:center;gap:1.25rem}
-.sup-icon{width:50px;height:50px;border-radius:50%;background:rgba(0,180,216,.15);border:1px solid rgba(0,180,216,.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.sup-card{background:rgba(249,115,22,.05);border:1px solid rgba(249,115,22,.15);border-radius:var(--radius);padding:1.5rem;display:flex;align-items:center;gap:1.25rem}
+.sup-icon{width:50px;height:50px;border-radius:50%;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
 .sup-info h4{font-family:'Playfair Display',serif;font-size:.95rem}
 .sup-info p{font-size:.9rem;color:var(--muted);line-height:1.65}
 
@@ -530,7 +591,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
             <strong style="color:var(--text)">Weighted Priority Hierarchy</strong>.
           </p>
 
-          <div style="margin-top:1.5rem;background:rgba(232,160,32,.06);border:1px solid rgba(232,160,32,.2);border-radius:10px;padding:1.25rem">
+          <div style="margin-top:1.5rem;background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:1.25rem">
             <p style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--gold);margin-bottom:.5rem">FINAL FORECAST FORMULA</p>
             <p style="font-family:'DM Mono',monospace;font-size:.82rem;color:var(--text)">
               Ŷ<sub>final</sub> = Ŷ<sub>base</sub> × (Σ w<sub>i</sub>δ<sub>i</sub>) / Σ w<sub>i</sub>
@@ -613,7 +674,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
           <p style="font-size:.88rem;color:var(--muted);margin-bottom:1.25rem">
             The dynamic inventory planner calculates the target stock level as:
           </p>
-          <div style="background:rgba(0,180,216,.06);border:1px solid rgba(0,180,216,.2);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem">
+          <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem">
             <p style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--teal);margin-bottom:.5rem">TARGET STOCK CALCULATION</p>
             <p style="font-family:'DM Mono',monospace;font-size:.82rem">S<sub>target</sub> = L<sub>reorder</sub> + B<sub>size</sub></p>
             <p style="font-family:'DM Mono',monospace;font-size:.82rem;margin-top:.4rem">B<sub>target</sub> = W<sub>avg</sub> × D<sub>buffer</sub></p>
@@ -656,15 +717,15 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
             <div style="margin-top:.5rem;border:1px dashed rgba(255,255,255,.15);border-radius:8px;padding:.5rem;font-size:.68rem;color:var(--muted)">↑ Waste feeds back to update buffer automatically</div>
           </div>
           <div style="margin-top:1.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem">
-            <div style="background:rgba(6,214,160,.08);border:1px solid rgba(6,214,160,.2);border-radius:8px;padding:1rem;text-align:center">
+            <div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:1rem;text-align:center">
               <div style="font-size:1.5rem;font-family:'Playfair Display',serif;color:var(--green)">↓</div>
               <div style="font-size:.75rem;color:var(--muted);margin-top:.25rem">Food Waste Reduced</div>
             </div>
-            <div style="background:rgba(0,180,216,.08);border:1px solid rgba(0,180,216,.2);border-radius:8px;padding:1rem;text-align:center">
+            <div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:8px;padding:1rem;text-align:center">
               <div style="font-size:1.5rem;font-family:'Playfair Display',serif;color:var(--teal)">&lt;5%</div>
               <div style="font-size:.75rem;color:var(--muted);margin-top:.25rem">Stockout Rate</div>
             </div>
-            <div style="background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.2);border-radius:8px;padding:1rem;text-align:center">
+            <div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:8px;padding:1rem;text-align:center">
               <div style="font-size:1.5rem;font-family:'Playfair Display',serif;color:var(--gold)">30d</div>
               <div style="font-size:.75rem;color:var(--muted);margin-top:.25rem">Simulation Period</div>
             </div>
@@ -841,11 +902,11 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
             <div class="arch-row"><div class="arch-box red">Notification Service<br/><span style="font-size:.65rem">SMS · Email · WhatsApp</span></div></div>
           </div>
           <div style="margin-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
-            <div style="background:rgba(6,214,160,.06);border:1px solid rgba(6,214,160,.18);border-radius:8px;padding:1rem;font-size:.82rem;color:var(--muted)">
+            <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);border-radius:8px;padding:1rem;font-size:.82rem;color:var(--muted)">
               <strong style="color:var(--green);display:block;margin-bottom:.25rem">Primary Metrics</strong>
               MAE · RMSE · MAPE<br/>Stockout Reduction<br/>Spoilage Reduction
             </div>
-            <div style="background:rgba(0,180,216,.06);border:1px solid rgba(0,180,216,.18);border-radius:8px;padding:1rem;font-size:.82rem;color:var(--muted)">
+            <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.18);border-radius:8px;padding:1rem;font-size:.82rem;color:var(--muted)">
               <strong style="color:var(--teal);display:block;margin-bottom:.25rem">Secondary Metrics</strong>
               Dashboard Satisfaction<br/>Cost Savings / Store<br/>System Reliability
             </div>
@@ -1332,21 +1393,21 @@ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 /* ── Gantt Chart ── */
 const tasks=[
-  {label:'Requirements & Design',start:0,end:1,color:'#e8a020'},
-  {label:'Data Collection',start:0,end:2,color:'#00b4d8'},
-  {label:'Model Development (C1&C2)',start:1,end:3,color:'#e8a020'},
-  {label:'Price Prediction (C3)',start:1,end:4,color:'#e63946'},
-  {label:'Supplier Dashboard (C4)',start:2,end:5,color:'#06d6a0'},
-  {label:'System Integration',start:4,end:6,color:'#00b4d8'},
-  {label:'Testing & Evaluation',start:5,end:7,color:'#06d6a0'},
-  {label:'Report Writing',start:6,end:7,color:'#e8a020'},
+  {label:'Requirements & Design',start:0,end:1,color:'#f97316'},
+  {label:'Data Collection',start:0,end:2,color:'#f97316'},
+  {label:'Model Development (C1&C2)',start:1,end:3,color:'#f97316'},
+  {label:'Price Prediction (C3)',start:1,end:4,color:'#ef4444'},
+  {label:'Supplier Dashboard (C4)',start:2,end:5,color:'#10b981'},
+  {label:'System Integration',start:4,end:6,color:'#f97316'},
+  {label:'Testing & Evaluation',start:5,end:7,color:'#10b981'},
+  {label:'Report Writing',start:6,end:7,color:'#f97316'},
 ];
 const gantt=document.getElementById('gantt-rows');
 tasks.forEach(t=>{
   const row=document.createElement('div');
   row.style.cssText='display:grid;grid-template-columns:180px repeat(8,1fr);gap:2px;margin-bottom:5px;align-items:center';
   const label=document.createElement('div');
-  label.style.cssText='font-size:.72rem;color:#7a91aa;font-family:"DM Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';
+  label.style.cssText='font-size:.72rem;color:#6b7280;font-family:"DM Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';
   label.textContent=t.label;
   row.appendChild(label);
   for(let i=0;i<8;i++){
