@@ -97,8 +97,8 @@ p{color:var(--muted)}
   transition: transform 0.18s cubic-bezier(.22,1,.36,1), box-shadow 0.18s;
 }
 .hero-actions .btn:hover {
-  transform: scale(1.09);
-  box-shadow: 0 4px 24px rgba(0,180,216,0.13);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(10,147,168,0.12);
   z-index: 2;
 }
 .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:5rem;padding-top:3rem;border-top:1px solid var(--border)}
@@ -118,6 +118,7 @@ p{color:var(--muted)}
 .lit-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;position:relative;overflow:hidden}
 .lit-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent)}
 .lit-icon{font-size:1.8rem;margin-bottom:1rem}
+.lit-icon{font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;padding:.3rem .55rem;border-radius:999px;color:var(--muted);margin-bottom:1rem}
 .lit-card h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.5rem;color:var(--text)}
 .lit-card p{font-size:.85rem;color:var(--muted);line-height:1.6}
 
@@ -215,7 +216,7 @@ p{color:var(--muted)}
 #documents{background:var(--navy)}
 .doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-top:2.5rem}
 .doc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
-.doc-icon{font-size:2rem}
+.doc-icon{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border);border-radius:999px;padding:.25rem .6rem;color:var(--muted)}
 .doc-title{font-family:'Playfair Display',serif;font-size:.95rem}
 .doc-status{font-family:'DM Mono',monospace;font-size:.68rem;padding:.2rem .5rem;border-radius:4px}
 .doc-status.ready{background:rgba(6,214,160,.12);color:var(--green)}
@@ -226,7 +227,7 @@ p{color:var(--muted)}
 #slides{background:var(--navy2)}
 .slides-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:2.5rem}
 .slide-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.slide-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.slide-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:.08em;color:var(--muted);position:relative}
 .slide-thumb.t1{background:linear-gradient(135deg,rgba(232,160,32,.15),rgba(0,180,216,.15))}
 .slide-thumb.t2{background:linear-gradient(135deg,rgba(0,180,216,.15),rgba(6,214,160,.15))}
 .slide-thumb.t3{background:linear-gradient(135deg,rgba(6,214,160,.15),rgba(232,160,32,.15))}
@@ -262,7 +263,7 @@ p{color:var(--muted)}
 .contact-info h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1rem}
 .contact-info p{font-size:.9rem;color:var(--muted);margin-bottom:2rem}
 .contact-detail{display:flex;gap:.75rem;align-items:flex-start;margin-bottom:1.25rem}
-.contact-detail-icon{font-size:1.2rem;margin-top:.1rem;flex-shrink:0}
+.contact-detail-icon{font-size:1.1rem;line-height:1;margin-top:.25rem;flex-shrink:0;color:var(--teal)}
 .contact-detail-text p{font-size:.85rem;color:var(--muted)}
 .contact-detail-text strong{font-size:.9rem;color:var(--text)}
 .contact-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
@@ -360,7 +361,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
     </p>
     <div class="hero-actions reveal">
       <a href="#domain" class="btn btn-primary">Explore Research ↓</a>
-      <a href="#documents" class="btn btn-outline">📄 View Documents</a>
+      <a href="#documents" class="btn btn-outline">View Documents</a>
       <a href="#components" class="btn btn-primary">View Components </a>
     </div>
     
@@ -384,32 +385,32 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
     <!-- Literature Cards -->
     <div class="lit-grid">
         <div class="lit-card reveal">
-          <div class="lit-icon">📊</div>
+          <div class="lit-icon">01</div>
           <h4>Time-Series Forecasting</h4>
           <p>ARIMA and exponential smoothing are well-established for short-term commodity prediction. However, they fail to capture nonlinear demand patterns and Sri Lanka–specific cultural surges.</p>
         </div>
         <div class="lit-card reveal">
-          <div class="lit-icon">🤖</div>
+          <div class="lit-icon">02</div>
           <h4>Machine Learning Approaches</h4>
           <p>Random Forest, Gradient Boosting (LightGBM), and LSTM networks outperform classical methods on volatile, multivariate datasets. Most existing implementations assume large, clean historical data.</p>
         </div>
         <div class="lit-card reveal">
-          <div class="lit-icon">🏪</div>
+          <div class="lit-icon">03</div>
           <h4>Supplier Recommendation Systems</h4>
           <p>Multi-Criteria Decision Making (MCDM) with AHP and ML-based ranking evaluate suppliers by cost, reliability, and freshness — primarily in large supply chains.</p>
         </div>
         <div class="lit-card reveal">
-          <div class="lit-icon">🔒</div>
+          <div class="lit-icon">04</div>
           <h4>Privacy-Preserving Forecasting</h4>
           <p>Federated Learning enables collaborative model training without sharing raw sales data. Differential Privacy and secure multi-party computation supplement this for SME settings.</p>
         </div>
         <div class="lit-card reveal">
-          <div class="lit-icon">♻️</div>
+          <div class="lit-icon">05</div>
           <h4>Waste Management &amp; Inventory</h4>
           <p>EOQ and JIT models optimise static inventory but cannot adapt to perishable, demand-volatile restaurant environments. AI-powered adaptive buffers offer dynamic correction.</p>
         </div>
         <div class="lit-card reveal">
-          <div class="lit-icon">🌦️</div>
+          <div class="lit-icon">06</div>
           <h4>External Variable Integration</h4>
           <p>Weather data, cultural calendars, and temporal features significantly improve demand forecast accuracy for hospitality businesses — yet remain underutilised in small-scale settings.</p>
         </div>
@@ -420,27 +421,27 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
     <h2 class="reveal">What the Literature Missed</h2>
     <div class="gap-grid reveal">
       <div class="gap-card">
-        <h4>❌ Low-Data Models Absent</h4>
+        <h4>Low-Data Models Absent</h4>
         <p>Existing forecasting frameworks require large, structured datasets unavailable to typical Sri Lankan restaurants that maintain only manual logbooks.</p>
       </div>
       <div class="gap-card">
-        <h4>❌ Siloed Forecasting</h4>
+        <h4>Siloed Forecasting</h4>
         <p>Most tools predict demand in isolation without converting forecasts into recipe-mapped ingredient procurement plans, making outputs non-actionable.</p>
       </div>
       <div class="gap-card">
-        <h4>❌ No Operational Feedback</h4>
+        <h4>No Operational Feedback</h4>
         <p>Inventory buffers are set statically and never adjusted based on actual kitchen waste — missing a critical closed-loop feedback mechanism.</p>
       </div>
       <div class="gap-card">
-        <h4>❌ Privacy Barriers</h4>
+        <h4>Privacy Barriers</h4>
         <p>Restaurant owners resist sharing raw transactional data with suppliers, yet collaborative forecasting requires some form of aggregated demand intelligence.</p>
       </div>
       <div class="gap-card sol">
-        <h4>✅ Our Contribution</h4>
+        <h4>Our Contribution</h4>
         <p>An integrated end-to-end system combining lightweight hybrid forecasting, adaptive waste-driven inventory control, price prediction, and privacy-preserving supplier dashboards.</p>
       </div>
       <div class="gap-card sol">
-        <h4>✅ Context-Aware Sri Lanka Focus</h4>
+        <h4>Context-Aware Sri Lanka Focus</h4>
         <p>Incorporates the Sri Lankan cultural calendar, local weather, and SME operational realities — features no existing solution currently addresses holistically.</p>
       </div>
     </div>
@@ -753,11 +754,11 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
           <div style="margin-top:1.5rem">
             <p style="font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:.75rem">KEY FUNCTIONAL REQUIREMENTS</p>
             <ul style="list-style:none;font-size:.82rem;color:var(--muted)">
-              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">🔮 Weekly & monthly dish price predictions</li>
-              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">🏆 Best supplier ranked per ingredient</li>
-              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">🔔 Price-spike alerts via WhatsApp/notification</li>
-              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">📊 Decision-support report generation</li>
-              <li style="padding:.3rem 0">📥 PDF / Excel export for business use</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">Weekly and monthly dish price predictions</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">Best supplier ranked per ingredient</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">Price-spike alerts via WhatsApp or notifications</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">Decision-support report generation</li>
+              <li style="padding:.3rem 0">PDF and Excel export for business use</li>
             </ul>
           </div>
         </div>
@@ -876,8 +877,8 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
             <span class="tag tag--green">Completed</span>
           </div>
           <div class="meta" style="margin-top:.5rem">
-            <span>📅 08th September 2025</span>
-            <span>⭐ Assessment 01</span>
+            <span>Date: 08th September 2025</span>
+            <span>Assessment 01</span>
           </div>
           <p>Individual proposal reports submitted by all four team members. Research gaps identified, methodologies defined, and systems architectures drafted for all four components.</p>
         </div>
@@ -891,8 +892,8 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
             <span class="tag tag--green">Completed</span>
           </div>
           <div class="meta" style="margin-top:.5rem">
-            <span>📅 09th January 2026</span>
-            <span>⭐ Assessment 02</span>
+            <span>Date: 09th January 2026</span>
+            <span>Assessment 02</span>
           </div>
           <p>Data collection completed, preprocessing pipelines built, and initial ML model training underway for all components. Baseline forecasting models benchmarked.</p>
         </div>
@@ -906,8 +907,8 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
             <span class="tag tag--green">Completed</span>
           </div>
           <div class="meta" style="margin-top:.5rem">
-            <span>📅 9th March 2026</span>
-            <span>⭐ Assessment 03</span>
+            <span>Date: 9th March 2026</span>
+            <span>Assessment 03</span>
           </div>
           <p>Full system integration milestone. Hybrid forecaster integrated with inventory management. Supplier dashboard connected with federated learning layer. End-to-end pipeline functional and under evaluation.</p>
         </div>
@@ -921,8 +922,8 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
             <span class="tag tag--teal">Upcoming</span>
           </div>
           <div class="meta" style="margin-top:.5rem">
-            <span>📅 4th May 2026</span>
-            <span>⭐ Final Assessment</span>
+            <span>Date: 4th May 2026</span>
+            <span>Final Assessment</span>
           </div>
           <p>Final research paper submitted. All four system components validated against holdout datasets. Viva voce conducted.</p>
         </div>
@@ -960,103 +961,103 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
 
       <div class="doc-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div class="doc-icon">📋</div>
+          <div class="doc-icon">DC</div>
           <span class="doc-status ready">Available</span>
         </div>
         <div class="doc-title">Project Charter</div>
         <p style="font-size:.8rem;color:var(--muted)">Initial project charter defining scope, team roles, and research objectives for Project 25_26J_393.</p>
         <div class="doc-actions">
-          <a href="./assets/TAF_25-26J-393.pdf" class="btn btn-teal" download>⬇ Download</a>
-          <a href="./assets/TAF_25-26J-393.pdf" class="btn btn-outline">👁 View</a>
+          <a href="./assets/TAF_25-26J-393.pdf" class="btn btn-teal" download>Download</a>
+          <a href="./assets/TAF_25-26J-393.pdf" class="btn btn-outline">View</a>
         </div>
       </div>
 
       <div class="doc-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div class="doc-icon">📄</div>
+          <div class="doc-icon">PR</div>
           <span class="doc-status ready">Available</span>
         </div>
         <div class="doc-title">Proposal Report — Thilakarathna W.P.N.S.</div>
         <p style="font-size:.8rem;color:var(--muted)">IT22073846 · Lightweight Hybrid Food Demand Forecaster component proposal.</p>
         <div class="doc-actions">
-          <a href="assets/Proposal Report - Thilakarathna WPNS.pdf" class="btn btn-teal" download>⬇ Download</a>
-          <a href="assets/Proposal Report - Thilakarathna WPNS.pdf" class="btn btn-outline">👁 View</a>
+          <a href="assets/Proposal Report - Thilakarathna WPNS.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Proposal Report - Thilakarathna WPNS.pdf" class="btn btn-outline">View</a>
         </div>
       </div>
 
       <div class="doc-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div class="doc-icon">📄</div>
+          <div class="doc-icon">PR</div>
           <span class="doc-status ready">Available</span>
         </div>
         <div class="doc-title">Proposal Report — Jayathunga A.G.I.A.</div>
         <p style="font-size:.8rem;color:var(--muted)">IT22642950 · AI Enabled Inventory Management System</p>
         <div class="doc-actions">
-          <a href="assets/Proposal Report - Jayathunga AGIA.pdf" class="btn btn-teal" download>⬇ Download</a>
-          <a href="assets/Proposal Report - Jayathunga AGIA.pdf" class="btn btn-outline">👁 View</a>
+          <a href="assets/Proposal Report - Jayathunga AGIA.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Proposal Report - Jayathunga AGIA.pdf" class="btn btn-outline">View</a>
         </div>
       </div>
 
       <div class="doc-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div class="doc-icon">📄</div>
+          <div class="doc-icon">PR</div>
           <span class="doc-status ready">Available</span>
         </div>
         <div class="doc-title">Proposal Report — Fernando W.G.P.N</div>
         <p style="font-size:.8rem;color:var(--muted)">IT22261946 · Food Price Prediction &amp; Supplier Recommendation component proposal.</p>
         <div class="doc-actions">
-          <a href="assets/Proposal Report - Fernando WGPN.pdf" class="btn btn-teal" download>⬇ Download</a>
-          <a href="assets/Proposal Report - Fernando WGPN.pdf" class="btn btn-outline">👁 View</a>
+          <a href="assets/Proposal Report - Fernando WGPN.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Proposal Report - Fernando WGPN.pdf" class="btn btn-outline">View</a>
         </div>
       </div>
 
       <div class="doc-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div class="doc-icon">📄</div>
+          <div class="doc-icon">PR</div>
           <span class="doc-status ready">Available</span>
         </div>
         <div class="doc-title">Proposal Report — Alawaththa A.K.A.A</div>
         <p style="font-size:.8rem;color:var(--muted)">IT22249470 · Supplier Demand Forecasting Dashboard component proposal.</p>
         <div class="doc-actions">
-          <a href="assets/Proposal Report - Alawaththa AKAA.pdf" class="btn btn-teal" download>⬇ Download</a>
-          <a href="assets/Proposal Report - Alawaththa AKAA.pdf" class="btn btn-outline">👁 View</a>
+          <a href="assets/Proposal Report - Alawaththa AKAA.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Proposal Report - Alawaththa AKAA.pdf" class="btn btn-outline">View</a>
         </div>
       </div>
 
       <div class="doc-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div class="doc-icon">📑</div>
+          <div class="doc-icon">CL</div>
           <span class="doc-status pending">In Progress</span>
         </div>
         <div class="doc-title">Checklist Documents</div>
         <p style="font-size:.8rem;color:var(--muted)">Assessment checklists and milestone compliance documents for all project phases.</p>
         <div class="doc-actions">
-          <a href="#" class="btn btn-outline" style="cursor:not-allowed;opacity:.5">⏳ Pending</a>
+          <a href="#" class="btn btn-outline" style="cursor:not-allowed;opacity:.5">Pending</a>
         </div>
       </div>
 
       <div class="doc-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div class="doc-icon">📑</div>
+          <div class="doc-icon">RD</div>
           <span class="doc-status pending">In Progress</span>
         </div>
         <div class="doc-title">Research Paper — Draft V1</div>
         <p style="font-size:.8rem;color:var(--muted)">Combined research paper covering Components 01 &amp; 02 (IEEE format). Currently under revision.</p>
         <div class="doc-actions">
-          <a href="assets/Research Paper Draft.pdf" class="btn btn-teal" download>⬇ Download</a>
-          <a href="assets/Research Paper Draft.pdf" class="btn btn-outline">👁 View</a>
+          <a href="assets/Research Paper Draft.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Research Paper Draft.pdf" class="btn btn-outline">View</a>
         </div>
       </div>
 
       <div class="doc-card">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
-          <div class="doc-icon">📚</div>
+          <div class="doc-icon">FR</div>
           <span class="doc-status pending">Pending</span>
         </div>
         <div class="doc-title">Final Research Document (All 4 Components)</div>
         <p style="font-size:.8rem;color:var(--muted)">Complete final research document integrating all four components — due August 2026.</p>
         <div class="doc-actions">
-          <a href="#" class="btn btn-outline" style="cursor:not-allowed;opacity:.5">⏳ Pending</a>
+          <a href="#" class="btn btn-outline" style="cursor:not-allowed;opacity:.5">Pending</a>
         </div>
       </div>
 
@@ -1076,7 +1077,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
     <div class="slides-grid reveal">
 
       <div class="slide-card">
-        <div class="slide-thumb t1">📊</div>
+        <div class="slide-thumb t1">01</div>
         <div class="slide-info">
           <h4>Proposal Presentation</h4>
           <p>Initial research proposal presentation covering all four components, research gaps, and methodology overview.</p>
@@ -1086,13 +1087,13 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
           </div>
           <div class="actions">
             <a href="#" class="btn btn-teal" onclick="downloadPlaceholder(event,'Proposal_Slides.pptx')">Download</a>
-            <a href="#" class="btn btn-outline">👁 View</a>
+            <a href="#" class="btn btn-outline">View</a>
           </div>
         </div>
       </div>
 
       <div class="slide-card">
-        <div class="slide-thumb t2">📈</div>
+        <div class="slide-thumb t2">02</div>
         <div class="slide-info">
           <h4>Progress Presentation I</h4>
           <p>Interim results from data collection, preprocessing pipelines, and initial model training across all components.</p>
@@ -1102,13 +1103,13 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
           </div>
             <div class="actions">
               <a href="assets/Progress Presentation 1.pptx" class="btn btn-teal" download>Download</a>
-              <a href="assets/Progress Presentation 1.pptx" class="btn btn-outline" target="_blank">👁 View</a>
+              <a href="assets/Progress Presentation 1.pptx" class="btn btn-outline" target="_blank">View</a>
             </div>
         </div>
       </div>
 
       <div class="slide-card">
-        <div class="slide-thumb t3">🔬</div>
+        <div class="slide-thumb t3">03</div>
         <div class="slide-info">
           <h4>Progress Presentation II</h4>
           <p>Full integration showcase — hybrid forecaster pipeline, adaptive buffer algorithm live demo, and supplier dashboard.</p>
@@ -1118,13 +1119,13 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
           </div>
             <div class="actions">
               <a href="assets/Progress Presentation 2.pptx" class="btn btn-teal" download>Download</a>
-              <a href="assets/Progress Presentation 2.pptx" class="btn btn-outline" target="_blank">👁 View</a>
+              <a href="assets/Progress Presentation 2.pptx" class="btn btn-outline" target="_blank">View</a>
             </div>
         </div>
       </div>
 
       <div class="slide-card">
-        <div class="slide-thumb t4">🏆</div>
+        <div class="slide-thumb t4">04</div>
         <div class="slide-info">
           <h4>Final Presentation</h4>
           <p>Comprehensive final results, system evaluation metrics, waste reduction outcomes, and business impact analysis.</p>
@@ -1133,7 +1134,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
             <span style="font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted)">4th May 2026</span>
           </div>
           <div class="actions">
-            <a href="#" class="btn btn-outline" style="opacity:.5;cursor:not-allowed">⏳ Pending</a>
+            <a href="#" class="btn btn-outline" style="opacity:.5;cursor:not-allowed">Pending</a>
           </div>
         </div>
       </div>
@@ -1157,33 +1158,33 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
         <div class="team-avatar av1"><img src="assets/jayathunga.png" alt="Jayathunga A.G.I.A." style="width:72px;height:72px;border-radius:50%"></div>
         <h4>Jayathunga A.G.I.A.</h4>
         <div class="team-id">IT22642950</div>
-        <div class="team-role">🔬 AI Supported Inventory & Reorder Management</div>
+        <div class="team-role">AI Supported Inventory and Reorder Management</div>
         <p style="font-size:.8rem;color:var(--muted);margin:.4rem 0">Research Paper Primary Author · Adaptive Buffer Algorithm</p>
-        <div class="team-email">📧 it22642950@my.sliit.lk</div>
+        <div class="team-email">it22642950@my.sliit.lk</div>
       </div>
       <div class="team-card">
         <div class="team-avatar av2"><img src="assets/thilakarathna.png" alt="Thilakarathna W.P.N.S." style="width:72px;height:72px;border-radius:50%"></div>
         <h4>Thilakarathna W.P.N.S.</h4>
         <div class="team-id">IT22073846</div>
-        <div class="team-role">📊 Demand Forecasting &amp; Rule Engine</div>
+        <div class="team-role">Demand Forecasting and Rule Engine</div>
         <p style="font-size:.8rem;color:var(--muted);margin:.4rem 0">Hybrid ML + Rule-Based Forecasting · LightGBM, Prophet</p>
-        <div class="team-email">📧 it22073846@my.sliit.lk</div>
+        <div class="team-email">it22073846@my.sliit.lk</div>
       </div>
       <div class="team-card">
         <div class="team-avatar av3"><img src="assets/fernando.png" alt="Fernando W.G.P.N." style="width:72px;height:72px;border-radius:50%"></div>
         <h4>Fernando W.G.P.N.</h4>
         <div class="team-id">IT22261946</div>
-        <div class="team-role">💰 Price Prediction &amp; Supplier Rec.</div>
+        <div class="team-role">Price Prediction and Supplier Recommendation</div>
         <p style="font-size:.8rem;color:var(--muted);margin:.4rem 0">ARIMA · LSTM · AHP Supplier Ranking · Decision Support</p>
-        <div class="team-email">📧 it22261946@my.sliit.lk</div>
+        <div class="team-email">it22261946@my.sliit.lk</div>
       </div>
       <div class="team-card">
         <div class="team-avatar av4"><img src="assets/alawatta.png" alt="Alawaththa A.K.A.A." style="width:72px;height:72px;border-radius:50%"></div>
         <h4>Alawaththa A.K.A.A.</h4>
         <div class="team-id">IT22249470</div>
-        <div class="team-role">🔒 Supplier Dashboard &amp; Demand Forecasting</div>
+        <div class="team-role">Supplier Dashboard and Demand Forecasting</div>
         <p style="font-size:.8rem;color:var(--muted);margin:.4rem 0">Supplier Demand Forecasting · Supplier Dashboard · EOQ</p>
-        <div class="team-email">📧 it22249470@my.sliit.lk</div>
+        <div class="team-email">it22249470@my.sliit.lk</div>
       </div>
     </div>
 
@@ -1191,7 +1192,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
       <p class="section-label">Supervisors</p>
       <div class="supervisor-row">
         <div class="sup-card">
-          <div class="sup-icon">👨‍🏫</div>
+          <div class="sup-icon">S</div>
           <div class="sup-info">
             <h4>Mr. Ravi Supunya</h4>
             <p>Project Supervisor · Department of Information Technology, SLIIT</p>
@@ -1199,7 +1200,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
           </div>
         </div>
         <div class="sup-card">
-          <div class="sup-icon">👩‍🏫</div>
+          <div class="sup-icon">S</div>
           <div class="sup-info">
             <h4>Mrs. Chathurya Kumarapperuma</h4>
             <p>Co-Supervisor · Department of Information Technology, SLIIT</p>
@@ -1222,28 +1223,28 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
         <p>Have questions about our research? We'd love to hear from you.</p>
 
         <div class="contact-detail">
-          <div class="contact-detail-icon">👤</div>
+          <div class="contact-detail-icon">•</div>
           <div class="contact-detail-text">
             <strong>Thilakarathna W.P.N.S.</strong>
             <p>it22073846@my.sliit.lk · 0719355359</p>
           </div>
         </div>
         <div class="contact-detail">
-          <div class="contact-detail-icon">👤</div>
+          <div class="contact-detail-icon">•</div>
           <div class="contact-detail-text">
             <strong>Jayathunga A.G.I.A.</strong>
             <p>it22642950@my.sliit.lk · 0759089188</p>
           </div>
         </div>
         <div class="contact-detail">
-          <div class="contact-detail-icon">👤</div>
+          <div class="contact-detail-icon">•</div>
           <div class="contact-detail-text">
             <strong>Alawatta A.K.A.A.</strong>
             <p>it22249470@my.sliit.lk · 0764233231 </p>
           </div>
         </div>
         <div class="contact-detail">
-          <div class="contact-detail-icon">👤</div>
+          <div class="contact-detail-icon">•</div>
           <div class="contact-detail-text">
             <strong>Fernando W.P.G.N.</strong>
             <p>it22261946@my.sliit.lk · 0776474109 </p>
