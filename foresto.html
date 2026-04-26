@@ -369,38 +369,35 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
 .obj-cols{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
 @media(max-width:700px){.obj-cols{grid-template-columns:1fr}}
 
-/* ─── SIMPLE MODERN THEME OVERRIDES ───────────────── */
+/* ─── RESEARCH JOURNAL THEME OVERRIDES ─────────────── */
 * {
   font-family: 'Poppins', sans-serif !important;
 }
 
 body {
-  background:
-    radial-gradient(circle at 0% 0%, rgba(148, 163, 184, 0.12) 0%, rgba(148, 163, 184, 0) 38%),
-    radial-gradient(circle at 100% 100%, rgba(203, 213, 225, 0.2) 0%, rgba(203, 213, 225, 0) 36%),
-    #f8fafc;
-  color: #0f172a;
-  line-height: 1.75;
+  background: linear-gradient(180deg, #f8f8f7 0%, #ffffff 36%, #f8f8f7 100%);
+  color: #111827;
+  line-height: 1.8;
 }
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #f8f8f7;
+  --foreground: #111827;
   --card: #ffffff;
-  --card-foreground: #0f172a;
-  --muted-ui: #f1f5f9;
-  --muted-foreground: #475569;
-  --border: #e2e8f0;
+  --card-foreground: #111827;
+  --muted-ui: #f3f4f6;
+  --muted-foreground: #4b5563;
+  --border: #d1d5db;
   --primary: #f97316;
   --primary-foreground: #ffffff;
   --gold: #f97316;
   --gold2: #ea580c;
   --orange: #c2410c;
-  --teal: #334155;
-  --teal2: #e2e8f0;
-  --glass: rgba(255, 255, 255, 0.9);
-  --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
-  --radius: 14px;
+  --teal: #1f2937;
+  --teal2: #e5e7eb;
+  --glass: rgba(255, 255, 255, 0.96);
+  --shadow: none;
+  --radius: 8px;
 }
 
 h1,
@@ -433,24 +430,25 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: 700;
-  line-height: 1.25;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #0f172a;
 }
 
 #nav {
-  background: rgba(255, 255, 255, 0.92);
-  border-bottom: 1px solid #e2e8f0;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid #d1d5db;
+  box-shadow: none;
 }
 
 .nav-links a {
-  color: #475569;
+  color: #4b5563;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: #0f172a;
-  background: #f1f5f9;
+  color: #111827;
+  background: #f3f4f6;
 }
 
 .nav-logo-mark {
@@ -480,46 +478,47 @@ h4 {
 .sup-card,
 .contact-form,
 .arch-diagram {
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
-  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: none;
+  border: 1px solid #d1d5db;
 }
 
 .btn {
-  border-radius: 10px;
+  border-radius: 6px;
   font-weight: 600;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #f97316, #ea580c);
+  background: #f97316;
+  border: 1px solid #ea580c;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #ea580c, #c2410c);
+  background: #ea580c;
 }
 
 .btn-outline {
-  border: 1px solid #c8d5e5;
-  color: #0f172a;
+  border: 1px solid #d1d5db;
+  color: #111827;
   background: #ffffff;
 }
 
 .btn-outline:hover {
-  border-color: #cbd5e1;
-  color: #0f172a;
-  background: #f8fafc;
+  border-color: #9ca3af;
+  color: #111827;
+  background: #f9fafb;
 }
 
 .btn-teal {
-  color: #334155;
-  border-color: #cbd5e1;
-  background: #f8fafc;
+  color: #374151;
+  border-color: #d1d5db;
+  background: #ffffff;
 }
 
 .btn-teal:hover {
-  color: #0f172a;
-  border-color: #94a3b8;
-  background: #f1f5f9;
+  color: #111827;
+  border-color: #9ca3af;
+  background: #f9fafb;
 }
 
 .hero-grid,
@@ -535,7 +534,7 @@ h4 {
 .team-card .team-role,
 .contact-detail-icon,
 .footer-right a:hover {
-  color: #334155;
+  color: #1f2937;
 }
 
 .hero h1 .accent {
@@ -543,14 +542,14 @@ h4 {
 }
 
 .hero h1 .accent2 {
-  color: #0f172a;
+  color: #111827;
 }
 
 .stat-num.g,
 .stat-num.t,
 .stat-num.gr,
 .stat-num.r {
-  color: #334155;
+  color: #111827;
 }
 
 .tag,
@@ -558,13 +557,40 @@ h4 {
 .doc-icon,
 .doc-status,
 .nav-id {
-  background: #f8fafc;
-  border-color: #e2e8f0;
-  color: #64748b;
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #4b5563;
 }
 
 .section-label {
   font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #f97316;
+}
+
+p,
+.hero-sub,
+.tl-card p,
+.doc-card p,
+.slide-info p,
+.contact-info p,
+.team-email,
+.team-card p {
+  color: #4b5563;
+}
+
+.metrics-table th {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.metrics-table td {
+  color: #374151;
+}
+
+.metrics-table tr.highlight td {
+  background: #ffedd5;
+  color: #9a3412;
 }
 
 #domain,
