@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Foresto | RP_25_26J_393 – AI-Enabled Food Demand Forecasting & Waste Management System for Sri Lankan Restaurants</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 :root {
   --radius: 0.5rem;
@@ -367,6 +368,211 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
 .objectives-section{margin-top:3rem}
 .obj-cols{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
 @media(max-width:700px){.obj-cols{grid-template-columns:1fr}}
+
+/* ─── SIMPLE MODERN THEME OVERRIDES ───────────────── */
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+body {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(14, 116, 144, 0.08) 0%, rgba(14, 116, 144, 0) 35%),
+    radial-gradient(circle at 100% 100%, rgba(15, 118, 110, 0.08) 0%, rgba(15, 118, 110, 0) 35%),
+    #f7fafc;
+  color: #0f172a;
+  line-height: 1.75;
+}
+
+:root {
+  --background: #f7fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --muted-ui: #eef2f7;
+  --muted-foreground: #475569;
+  --border: #dbe3ee;
+  --primary: #f97316;
+  --primary-foreground: #ffffff;
+  --gold: #f97316;
+  --gold2: #ea580c;
+  --orange: #c2410c;
+  --teal: #ea580c;
+  --teal2: #ffedd5;
+  --glass: rgba(255, 255, 255, 0.9);
+  --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  --radius: 14px;
+}
+
+h1,
+h2,
+h3,
+h4,
+.section-label,
+.nav-logo-text,
+.nav-logo-mark,
+.hero-badge-text,
+.stat-num,
+.nav-id,
+.tag,
+.tech-pill,
+.doc-icon,
+.doc-status,
+.tl-card .meta,
+.slide-thumb,
+.team-card .team-id,
+.method-tab,
+.obj-list li::before,
+.metrics-table th,
+.arch-box,
+.lit-icon {
+  letter-spacing: normal;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+#nav {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid #e3e8ef;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.nav-logo-mark {
+  background: transparent;
+  color: inherit;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  padding: 0;
+}
+
+.nav-logo-mark img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.card,
+.lit-card,
+.gap-card,
+.rp-box,
+.comp-card,
+.tl-card,
+.doc-card,
+.slide-card,
+.team-card,
+.sup-card,
+.contact-form,
+.arch-diagram {
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  border: 1px solid #e3e8ef;
+}
+
+.btn {
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ea580c, #c2410c);
+}
+
+.btn-outline {
+  border: 1px solid #c8d5e5;
+  color: #0f172a;
+  background: #ffffff;
+}
+
+.btn-outline:hover {
+  border-color: #ea580c;
+  color: #ea580c;
+  background: #fff7ed;
+}
+
+.btn-teal {
+  color: #ea580c;
+  border-color: #fdba74;
+  background: #fff7ed;
+}
+
+.hero-grid,
+.hero-glow1,
+.hero-glow2,
+.q-mark {
+  display: none;
+}
+
+.hero h1 .accent,
+.hero h1 .accent2,
+.section-label,
+.team-card .team-role,
+.contact-detail-icon,
+.footer-right a:hover {
+  color: #ea580c;
+}
+
+.stat-num.g,
+.stat-num.t,
+.stat-num.gr,
+.stat-num.r {
+  color: #f97316;
+}
+
+#domain,
+#milestones,
+#documents,
+#about,
+#contact,
+#slides,
+#methodology {
+  background: transparent !important;
+}
+
+#components {
+  background: transparent !important;
+}
+
+.comp-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 0 1.2rem;
+  }
+
+  .comp-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-actions {
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
 </style>
 </head>
 <body>
@@ -375,7 +581,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
 <nav id="nav">
   <div class="container nav-inner">
     <div class="nav-logo">
-      <div class="nav-logo-mark">F</div>
+      <div class="nav-logo-mark"><img src="assets/logo-v1.svg" alt="Foresto logo"/></div>
       <div class="nav-logo-text">Foresto<span></span></div>
     </div>
     <div class="nav-links" id="navLinks">
@@ -1346,7 +1552,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
   <div class="container footer-inner">
     <div class="footer-left">
       <div class="nav-logo" style="margin-bottom:.4rem">
-        <div class="nav-logo-mark">F</div>
+        <div class="nav-logo-mark"><img src="assets/logo-v1.svg" alt="Foresto logo"/></div>
         <div class="nav-logo-text">Foresto</div>
       </div>
       <p>2025–26 Research Project 25_26J_393 · SLIIT Department of Information Technology</p>
