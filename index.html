@@ -374,10 +374,14 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 
   font-family: 'Poppins', sans-serif !important;
 }
 
+html {
+  font-size: 15.5px;
+}
+
 body {
   background: linear-gradient(180deg, #f8f8f7 0%, #ffffff 36%, #f8f8f7 100%);
   color: #111827;
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 :root {
@@ -397,7 +401,7 @@ body {
   --teal2: #e5e7eb;
   --glass: rgba(255, 255, 255, 0.96);
   --shadow: none;
-  --radius: 8px;
+  --radius: 4px;
 }
 
 h1,
@@ -433,6 +437,7 @@ h4 {
   font-weight: 600;
   line-height: 1.35;
   color: #0f172a;
+  margin-bottom: 0.5em;
 }
 
 h2 {
@@ -443,8 +448,12 @@ h3 {
   font-size: 1.15rem;
 }
 
+h4 {
+  font-size: 1.02rem;
+}
+
 .section {
-  padding: 5rem 0;
+  padding: 4.25rem 0;
 }
 
 #nav {
@@ -490,13 +499,13 @@ h3 {
 .sup-card,
 .contact-form,
 .arch-diagram {
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: none;
   border: 1px solid #d1d5db;
 }
 
 .btn {
-  border-radius: 6px;
+  border-radius: 4px;
   font-weight: 600;
 }
 
@@ -573,12 +582,17 @@ h3 {
   background: #f9fafb;
   border-color: #d1d5db;
   color: #4b5563;
+  border-radius: 3px;
 }
 
 .section-label {
   font-weight: 600;
   letter-spacing: 0.08em;
   color: #374151;
+}
+
+.hero-sub {
+  max-width: 56ch;
 }
 
 /* Neutralize remaining semantic/accent classes to grayscale */
@@ -657,6 +671,16 @@ p,
 .team-email,
 .team-card p {
   color: #4b5563;
+  line-height: 1.66;
+  max-width: 62ch;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.method-tab,
+.arch-box {
+  border-radius: 4px;
 }
 
 .metrics-table th {
