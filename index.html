@@ -1367,14 +1367,8 @@ p,
     <!-- Gantt overview -->
     <div class="reveal" style="margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;overflow-x:auto">
       <p class="section-label" style="margin-bottom:1.25rem">Schedule Overview</p>
-      <div style="min-width:600px">
-        <div style="display:grid;grid-template-columns:180px repeat(12,1fr);gap:2px;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)">
-           <div></div>
-           <div style="text-align:center">Sep</div><div style="text-align:center">Oct</div><div style="text-align:center">Nov</div>
-           <div style="text-align:center">Dec</div><div style="text-align:center">Jan</div><div style="text-align:center">Feb</div>
-           <div style="text-align:center">Mar</div><div style="text-align:center">Apr</div>
-        </div>
-        <div id="gantt-rows" style="margin-top:.5rem"></div>
+      <div id="gantt-chart-container" style="min-width: 800px;">
+        <!-- Gantt chart will be rendered here by JavaScript -->
       </div>
     </div>
   </div>
@@ -1765,40 +1759,91 @@ const observer=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 /* ── Gantt Chart ── */
-const tasks=[
-  {label:'Requirements & Design',start:0,end:1,color:'#4b5563'},
-  {label:'Data Collection',start:0,end:2,color:'#6b7280'},
-  {label:'Model Development (C1&C2)',start:1,end:3,color:'#4b5563'},
-  {label:'Price Prediction (C3)',start:1,end:4,color:'#374151'},
-  {label:'Supplier Dashboard (C4)',start:2,end:5,color:'#6b7280'},
-  {label:'System Integration',start:4,end:6,color:'#4b5563'},
-  {label:'Testing & Evaluation',start:5,end:7,color:'#6b7280'},
-  {label:'Report Writing',start:6,end:7,color:'#374151'},
+const ganttContainer = document.getElementById('gantt-chart-container');
+
+const months = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'];
+
+const tasks = [
+    { label: 'Topic Selection', start: 0, end: 1, color: '#4b5563' },
+    { label: 'Requirements Gathering', start: 1, end: 3, color: '#6b7280' },
+    { label: 'Project Proposal Document', start: 2, end: 4, color: '#374151' },
+    { label: 'System Design', start: 4, end: 6, color: '#4b5563' },
+    { label: 'Implementation', start: 4, end: 8, color: '#6b7280' },
+    { label: 'Progress Presentation 1', start: 6, end: 6, color: '#374151' },
+    { label: 'Research Paper', start: 7, end: 9, color: '#4b5563' },
+    { label: 'Testing', start: 8, end: 10, color: '#6b7280' },
+    { label: 'Final Report', start: 10, end: 11, color: '#374151' },
+    { label: 'Progress Presentation 2', start: 10, end: 10, color: '#4b5563' },
+    { label: 'Logbook & Website', start: 10, end: 11, color: '#6b7280' },
+    { label: 'Final Presentation', start: 11, end: 11, color: '#1f2937' }
 ];
-const gantt=document.getElementById('gantt-rows');
-tasks.forEach(t=>{
-  const row=document.createElement('div');
-  row.style.cssText='display:grid;grid-template-columns:180px repeat(8,1fr);gap:2px;margin-bottom:5px;align-items:center';
-  const label=document.createElement('div');
-  label.style.cssText='font-size:.72rem;color:#6b7280;font-family:"DM Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';
-  label.textContent=t.label;
-  row.appendChild(label);
-  for(let i=0;i<8;i++){
-    const cell=document.createElement('div');
-    cell.style.cssText='height:14px;border-radius:3px';
-    if(i>=t.start&&i<=t.end){
-      cell.style.background=t.color+'55';
-      cell.style.border='1px solid '+t.color+'88';
-      if(i===t.start)cell.style.borderRadius='3px 0 0 3px';
-      if(i===t.end)cell.style.borderRadius='0 3px 3px 0';
-      if(t.start===t.end)cell.style.borderRadius='3px';
-    }else{
-      cell.style.background='rgba(255,255,255,.02)';
-    }
-    row.appendChild(cell);
-  }
-  gantt.appendChild(row);
-});
+
+function createGanttChart() {
+    if (!ganttContainer) return;
+
+    ganttContainer.style.fontFamily = "'Poppins', sans-serif";
+
+    // Create Header
+    const header = document.createElement('div');
+    header.style.display = 'grid';
+    header.style.gridTemplateColumns = `200px repeat(${months.length}, 1fr)`;
+    header.style.gap = '2px';
+    header.style.paddingBottom = '8px';
+    header.style.borderBottom = '1px solid #d1d5db';
+    header.style.marginBottom = '8px';
+
+    const emptyHeader = document.createElement('div');
+    header.appendChild(emptyHeader);
+
+    months.forEach(month => {
+        const monthEl = document.createElement('div');
+        monthEl.textContent = month;
+        monthEl.style.textAlign = 'center';
+        monthEl.style.fontSize = '0.7rem';
+        monthEl.style.fontWeight = '600';
+        monthEl.style.color = '#4b5563';
+        header.appendChild(monthEl);
+    });
+
+    ganttContainer.appendChild(header);
+
+    // Create Task Rows
+    tasks.forEach(task => {
+        const row = document.createElement('div');
+        row.style.display = 'grid';
+        row.style.gridTemplateColumns = `200px repeat(${months.length}, 1fr)`;
+        row.style.gap = '2px';
+        row.style.marginBottom = '6px';
+        row.style.alignItems = 'center';
+
+        const label = document.createElement('div');
+        label.textContent = task.label;
+        label.style.fontSize = '0.78rem';
+        label.style.color = '#374151';
+        label.style.whiteSpace = 'nowrap';
+        label.style.overflow = 'hidden';
+        label.style.textOverflow = 'ellipsis';
+        label.style.paddingRight = '10px';
+        row.appendChild(label);
+
+        for (let i = 0; i < months.length; i++) {
+            const cell = document.createElement('div');
+            cell.style.height = '20px';
+            cell.style.borderRadius = '3px';
+            
+            if (i >= task.start && i <= task.end) {
+                cell.style.background = task.color;
+                cell.setAttribute('title', task.label); // Tooltip for accessibility
+            } else {
+                cell.style.background = '#f3f4f6';
+            }
+            row.appendChild(cell);
+        }
+        ganttContainer.appendChild(row);
+    });
+}
+
+createGanttChart();
 
 
 
