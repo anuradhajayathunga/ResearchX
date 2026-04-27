@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Foresto | RP_25_26J_393 – AI-Enabled Food Demand Forecasting & Waste Management System for Sri Lankan Restaurants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --radius: 0.5rem;
+
+  /* Neutral, modern base */
+  --background: #f9fafb;
+  /* gray-50 */
+  --foreground: #111827;
+  /* gray-900 */
+
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+
+  /* Restaurant Primary (Orange) */
+  --primary: #f97316;
+  /* orange-500 */
+  --primary-foreground: #ffffff;
+
+  --secondary: #ff4136;
+  /* gray-100 */
+  --secondary-foreground: #111827;
+
+  --muted-ui: #f3f4f6;
+  --muted-foreground: #6b7280;
+  /* gray-500 */
+  --accent: #f3f4f6;
+  --accent-foreground: #111827;
+
+  --destructive: #ef4444;
+  /* red-500 */
+  --destructive-foreground: #ffffff;
+
+  --border: #e5e7eb;
+  /* gray-200 */
+  --input: #e5e7eb;
+  --ring: #f97316;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #f97316;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3f4f6;
+  --sidebar-accent-foreground: #111827;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #f97316;
+
+  /* Extra Restaurant Tokens (Mapped to JS values) */
+  --restaurant-primary: #f97316;
+  --restaurant-primary-dark: #ea580c;
+  /* orange-600 */
+  --restaurant-primary-light: #fdba74;
+  /* orange-300 */
+  --restaurant-sidebar-bg: #1f2937;
+  /* gray-800 */
+  --restaurant-sidebar-hover: #374151;
+  /* gray-700 */
+  --restaurant-success: #10b981;
+  /* green-500 */
+  --restaurant-warning: #f59e0b;
+  /* amber-500 */
+  --restaurant-error: #ef4444;
+  /* red-500 */
+
+  /* Existing site aliases */
+  --navy: var(--background);
+  --navy2: var(--muted-ui);
+  --navy3: #eceff3;
+  --gold: var(--primary);
+  --gold2: var(--restaurant-primary-light);
+  --orange: var(--restaurant-primary-dark);
+  --white: #ffffff;
+  --teal: var(--primary);
+  --teal2: var(--restaurant-primary-light);
+  --red: var(--destructive);
+  --green: var(--restaurant-success);
+  --text: var(--foreground);
+  --muted: var(--muted-foreground);
+  --card-hover: #ffffff;
+  --glass: rgba(255, 255, 255, 0.92);
+  --shadow: 0 12px 40px rgba(17, 24, 39, 0.1);
+}
+
+/* ─── RESET ──────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:linear-gradient(180deg,var(--background) 0%,#ffffff 45%,var(--muted-ui) 100%);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ─── UTILITY ────────────────────────────────────── */
+.container{max-width:1120px;margin:0 auto;padding:0 2rem}
+.section{padding:6.25rem 0}
+.tag{display:inline-block;font-size:.72rem;font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .75rem;border-radius:100px;border:1px solid var(--border)}
+.tag--gold{color:var(--gold);border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.08)}
+.tag--orange{color:var(--orange);border-color:rgba(235, 88, 14, 0.35);background:rgba(245, 235, 230, 0.08)}
+.tag--teal{color:var(--teal);border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.08)}
+.tag--green{color:var(--green);border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08)}
+.tag--red{color:var(--red);border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08)}
+.section-label{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.16;letter-spacing:.01em}
+h2{font-size:clamp(1.9rem,3.4vw,2.45rem)}
+h3{font-size:1.28rem}
+p{color:var(--muted);line-height:1.72;max-width:68ch}
+
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.5rem;border-radius:8px;font-size:.85rem;font-weight:500;cursor:pointer;transition:.2s;border:none;font-family:'DM Sans',sans-serif}
+.btn-primary{background:var(--gold);color:var(--white)}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);background:rgba(249,115,22,.07)}
+.btn-teal{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.35);color:var(--teal)}
+.btn-teal:hover{background:rgba(249,115,22,.25)}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:.25s;backdrop-filter:blur(6px)}
+.card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:var(--shadow)}
+
+/* ─── NAV ────────────────────────────────────────── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:999;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:var(--glass);border-bottom:1px solid var(--border);transition:.3s}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+.nav-logo{display:flex;align-items:center;gap:.6rem}
+.nav-logo-mark{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--orange),var(--white));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:var(--navy2);font-size:1rem}
+.nav-logo-text{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem}
+.nav-logo-text span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:.25rem}
+.nav-links a{font-size:.85rem;font-weight:500;padding:.45rem .85rem;border-radius:6px;color:var(--muted);transition:.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(10,147,168,.1)}
+.nav-id{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);padding:.35rem .7rem;border:1px solid var(--border);border-radius:6px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+
+/* ─── HERO ───────────────────────────────────────── */
+#home{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.4}
+.hero-glow1{position:absolute;top:-20%;left:-10%;width:70%;height:70%;background:radial-gradient(ellipse,rgba(213,140,39,.14) 0%,transparent 65%)}
+.hero-glow2{position:absolute;bottom:-20%;right:-5%;width:60%;height:60%;background:radial-gradient(ellipse,rgba(10,147,168,.12) 0%,transparent 65%)}
+.hero-content{position:relative;z-index:1;padding-top:5rem}
+.hero-badge{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-badge-text{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--muted);letter-spacing:.1em}
+.hero h1{font-size:clamp(2.3rem,5.2vw,3.9rem);line-height:1.1;margin-bottom:1.35rem;max-width:18ch}
+.hero h1 .accent{color:var(--gold);font-style:italic}
+.hero h1 .accent2{color:var(--teal)}
+.hero-sub{font-size:1.03rem;color:var(--muted);max-width:60ch;margin-bottom:2.2rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-actions .btn {
+  transition: transform 0.18s cubic-bezier(.22,1,.36,1), box-shadow 0.18s;
+}
+.hero-actions .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(10,147,168,0.12);
+  z-index: 2;
+}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:5rem;padding-top:3rem;border-top:1px solid var(--border)}
+.stat-item{text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;line-height:1}
+.stat-num.g{color:var(--gold)}
+.stat-num.t{color:var(--teal)}
+.stat-num.gr{color:var(--green)}
+.stat-num.r{color:var(--red)}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:.35rem}
+
+/* ─── DOMAIN ─────────────────────────────────────── */
+#domain{background:var(--navy2)}
+.domain-intro{max-width:70ch;margin-bottom:3.5rem}
+.domain-intro p{font-size:1.02rem;margin-top:1rem}
+.lit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:4rem}
+.lit-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;position:relative;overflow:hidden}
+.lit-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent)}
+.lit-icon{font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;padding:.3rem .55rem;border-radius:999px;color:var(--muted);margin-bottom:1rem}
+.lit-card h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.5rem;color:var(--text)}
+.lit-card p{font-size:.9rem;color:var(--muted);line-height:1.65}
+
+.gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:3rem}
+.gap-card{background:rgba(194,63,74,.06);border:1px solid rgba(194,63,74,.2);border-radius:var(--radius);padding:1.5rem}
+.gap-card h4{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--red);margin-bottom:.4rem}
+.gap-card p{font-size:.9rem;color:var(--muted);line-height:1.65}
+.gap-card.sol{background:rgba(25,143,105,.05);border-color:rgba(25,143,105,.2)}
+.gap-card.sol h4{color:var(--green)}
+
+.rp-box{background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);border-radius:var(--radius);padding:2.5rem;margin-top:3rem;position:relative}
+.rp-box h3{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:1rem}
+.rp-box p{font-size:1rem;font-style:italic;color:var(--text)}
+.q-mark{font-family:'Playfair Display',serif;font-size:5rem;color:rgba(249,115,22,.12);position:absolute;top:1rem;right:2rem;line-height:1}
+
+/* ─── COMPONENTS ─────────────────────────────────── */
+#domain .section-sub{background:var(--navy3);border-radius:var(--radius);padding:3rem;margin-top:4rem;border:1px solid var(--border)}
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:2.5rem;margin-top:3rem}
+@media(max-width:600px){.comp-grid{grid-template-columns:1fr}}
+.comp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.comp-header{padding:2rem 2rem 1.5rem;border-bottom:1px solid var(--border);position:relative}
+.comp-num{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.1em;margin-bottom:.5rem}
+.comp-header h3{font-family:'Playfair Display',serif;font-size:1.25rem;line-height:1.3}
+.comp-bar{height:3px;position:absolute;bottom:0;left:0;right:0}
+.bar1{background:linear-gradient(90deg,var(--gold),var(--teal))}
+.bar2{background:linear-gradient(90deg,var(--teal),var(--green))}
+.bar3{background:linear-gradient(90deg,var(--red),var(--gold))}
+.bar4{background:linear-gradient(90deg,var(--green),var(--teal))}
+.comp-body{padding:2rem}
+.comp-body p{font-size:.9rem;margin-bottom:1rem}
+.comp-features{list-style:none;margin:1rem 0}
+.comp-features li{font-size:.85rem;color:var(--muted);padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:.5rem;align-items:flex-start}
+.comp-features li::before{content:'→';color:var(--teal);flex-shrink:0;margin-top:.05rem}
+.comp-meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.tech-pill{font-family:'DM Mono',monospace;font-size:.68rem;padding:.25rem .55rem;border-radius:4px;background:rgba(255,255,255,.06);color:var(--muted)}
+
+/* OBJECTIVE / METHOD sub-section */
+.obj-list{list-style:none;counter-reset:obj;margin-top:1.5rem}
+.obj-list li{counter-increment:obj;display:flex;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
+.obj-list li::before{content:counter(obj,'0'counter(obj));font-family:'DM Mono',monospace;font-size:.8rem;color:var(--teal);flex-shrink:0;width:2rem;padding-top:.05rem}
+
+/* metrics table */
+.metrics-table{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:.85rem}
+.metrics-table th{background:rgba(249,115,22,.1);color:var(--teal);font-weight:600;padding:.7rem 1rem;text-align:left;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em}
+.metrics-table td{padding:.65rem 1rem;border-bottom:1px solid var(--border)}
+.metrics-table tr.highlight td{background:rgba(249,115,22,.08);color:var(--gold)}
+
+/* arch diagram */
+.arch-diagram{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-top:2rem;text-align:center;font-size:.82rem}
+.arch-row{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin:.75rem 0;align-items:center}
+.arch-box{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:8px;padding:.6rem 1rem;color:var(--teal);font-family:'DM Mono',monospace;font-size:.72rem;white-space:nowrap}
+.arch-box.gold{background:rgba(249,115,22,.1);border-color:rgba(249,115,22,.3);color:var(--gold)}
+.arch-box.green{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:var(--green)}
+.arch-box.red{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:var(--red)}
+.arch-arrow{color:var(--muted);font-size:1.2rem}
+
+/* ─── METHODOLOGY ────────────────────────────────── */
+#methodology{background:var(--navy)}
+.method-tabs{display:flex;gap:.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.method-tab{padding:.55rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:.2s;font-family:'DM Sans',sans-serif}
+.method-tab.active{background:rgba(249,115,22,.12);border-color:rgba(249,115,22,.4);color:var(--teal)}
+.method-panel{display:none}
+.method-panel.active{display:block}
+.pipeline{display:flex;flex-direction:column;gap:.5rem;position:relative}
+.pipeline-step{display:grid;grid-template-columns:40px 1fr;gap:1rem;align-items:start}
+.pipe-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;position:relative;z-index:1}
+.pipe-icon.gold{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4)}
+.pipe-icon.teal{background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4)}
+.pipe-icon.green{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4)}
+.pipe-icon.red{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4)}
+.pipe-content{padding-bottom:2rem}
+.pipe-content h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.4rem}
+.pipe-content p{font-size:.9rem;color:var(--muted);line-height:1.65}
+
+/* ─── MILESTONES ─────────────────────────────────── */
+#milestones{background:var(--navy2)}
+.timeline{position:relative;margin-top:3rem}
+.timeline::before{content:'';position:absolute;left:40px;top:0;bottom:0;width:2px;background:linear-gradient(var(--gold),var(--teal),var(--green));opacity:.3}
+.tl-item{display:grid;grid-template-columns:80px 1fr;gap:1.5rem;margin-bottom:2.5rem;position:relative}
+.tl-dot{width:80px;display:flex;justify-content:center;padding-top:.5rem}
+.dot-outer{width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;background:var(--navy);position:relative;z-index:1}
+.dot-inner{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.dot-outer.teal{border-color:var(--teal)}
+.dot-outer.teal .dot-inner{background:var(--teal)}
+.dot-outer.green{border-color:var(--green)}
+.dot-outer.green .dot-inner{background:var(--green)}
+.dot-outer.red{border-color:var(--red)}
+.dot-outer.red .dot-inner{background:var(--red)}
+.tl-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
+.tl-card h4{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.4rem}
+.tl-card .meta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.8rem;font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted)}
+.tl-card p{font-size:.9rem;color:var(--muted);margin-top:.5rem;line-height:1.65}
+
+/* ─── DOCUMENTS ──────────────────────────────────── */
+#documents{background:var(--navy)}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-top:2.5rem}
+.doc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.doc-icon{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border);border-radius:999px;padding:.25rem .6rem;color:var(--muted)}
+.doc-title{font-family:'Playfair Display',serif;font-size:.95rem}
+.doc-status{font-family:'DM Mono',monospace;font-size:.68rem;padding:.2rem .5rem;border-radius:4px}
+.doc-status.ready{background:rgba(16,185,129,.12);color:var(--green)}
+.doc-status.pending{background:rgba(249,115,22,.12);color:var(--gold)}
+.doc-actions{margin-top:auto;display:flex;gap:.5rem;flex-wrap:wrap}
+
+/* ─── PRESENTATIONS ──────────────────────────────── */
+#slides{background:var(--navy2)}
+.slides-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:2.5rem}
+.slide-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.slide-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:.08em;color:var(--muted);position:relative}
+.slide-thumb.t1{background:linear-gradient(135deg,rgba(249,115,22,.15),rgba(249,115,22,.15))}
+.slide-thumb.t2{background:linear-gradient(135deg,rgba(249,115,22,.15),rgba(16,185,129,.15))}
+.slide-thumb.t3{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(249,115,22,.15))}
+.slide-thumb.t4{background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(249,115,22,.15))}
+.slide-info{padding:1.25rem}
+.slide-info h4{font-family:'Playfair Display',serif;font-size:.95rem;margin-bottom:.3rem}
+.slide-info p{font-size:.9rem;color:var(--muted);line-height:1.65}
+.slide-info .actions{display:flex;gap:.5rem;margin-top:1rem}
+
+/* ─── ABOUT ──────────────────────────────────────── */
+#about{background:var(--navy)}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin-top:3rem}
+.team-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center}
+.team-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--navy)}
+.av1{background:linear-gradient(135deg,var(--gold),var(--gold2))}
+.av2{background:linear-gradient(135deg,var(--teal),var(--teal2))}
+.av3{background:linear-gradient(135deg,var(--red),#ff8fa3)}
+.av4{background:linear-gradient(135deg,var(--green),#80ffdb)}
+.team-card h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.2rem}
+.team-card .team-id{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted)}
+.team-card .team-role{font-size:.9rem;color:var(--teal);margin:.4rem 0}
+.team-card .team-email{font-size:.9rem;color:var(--muted)}
+.supervisor-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem}
+.sup-card{background:rgba(249,115,22,.05);border:1px solid rgba(249,115,22,.15);border-radius:var(--radius);padding:1.5rem;display:flex;align-items:center;gap:1.25rem}
+.sup-icon{width:50px;height:50px;border-radius:50%;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.sup-info h4{font-family:'Playfair Display',serif;font-size:.95rem}
+.sup-info p{font-size:.9rem;color:var(--muted);line-height:1.65}
+
+/* ─── CONTACT ────────────────────────────────────── */
+#contact{background:var(--navy2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start}
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
+.contact-info h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1rem}
+.contact-info p{font-size:.9rem;color:var(--muted);margin-bottom:2rem}
+.contact-detail{display:flex;gap:.75rem;align-items:flex-start;margin-bottom:1.25rem}
+.contact-detail-icon{font-size:1.1rem;line-height:1;margin-top:.25rem;flex-shrink:0;color:var(--teal)}
+.contact-detail-text p{font-size:.85rem;color:var(--muted)}
+.contact-detail-text strong{font-size:.9rem;color:var(--text)}
+.contact-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-size:.82rem;font-weight:500;margin-bottom:.4rem;color:var(--muted)}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,.95);border:1px solid var(--border);border-radius:8px;padding:.7rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;transition:.2s;outline:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--teal);background:#ffffff;box-shadow:0 0 0 3px rgba(10,147,168,.12)}
+.form-group textarea{min-height:130px;resize:vertical}
+.form-group select option{background:var(--navy2);color:var(--text)}
+
+/* ─── FOOTER ─────────────────────────────────────── */
+footer{background:var(--navy);border-top:1px solid var(--border);padding:2.5rem 0}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-left p{font-size:.82rem;color:var(--muted)}
+.footer-right{display:flex;gap:1rem}
+.footer-right a{font-size:.82rem;color:var(--muted);transition:.2s}
+.footer-right a:hover{color:var(--teal)}
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media(max-width:900px){
+  .nav-links{display:none;position:fixed;top:66px;left:0;right:0;background:var(--glass);backdrop-filter:blur(18px);flex-direction:column;padding:1rem;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .section{padding:4.75rem 0}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .timeline::before{left:20px}
+  .tl-item{grid-template-columns:40px 1fr;gap:1rem}
+  .tl-dot{width:40px}
+}
+
+/* scroll animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* tech objectives tags */
+.objectives-section{margin-top:3rem}
+.obj-cols{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+@media(max-width:700px){.obj-cols{grid-template-columns:1fr}}
+
+/* ─── RESEARCH JOURNAL THEME OVERRIDES ─────────────── */
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+html {
+  font-size: 15.5px;
+}
+
+body {
+  background: linear-gradient(180deg, #f8f8f7 0%, #ffffff 36%, #f8f8f7 100%);
+  color: #111827;
+  line-height: 1.7;
+}
+
+:root {
+  --background: #f8f8f7;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --muted-ui: #f3f4f6;
+  --muted-foreground: #4b5563;
+  --border: #d1d5db;
+  --primary: #111827;
+  --primary-foreground: #ffffff;
+  --gold: #1f2937;
+  --gold2: #111827;
+  --orange: #111827;
+  --teal: #1f2937;
+  --teal2: #e5e7eb;
+  --glass: rgba(255, 255, 255, 0.96);
+  --shadow: none;
+  --radius: 4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+.section-label,
+.nav-logo-text,
+.nav-logo-mark,
+.hero-badge-text,
+.stat-num,
+.nav-id,
+.tag,
+.tech-pill,
+.doc-icon,
+.doc-status,
+.tl-card .meta,
+.slide-thumb,
+.team-card .team-id,
+.method-tab,
+.obj-list li::before,
+.metrics-table th,
+.arch-box,
+.lit-icon {
+  letter-spacing: normal;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  line-height: 1.35;
+  color: #0f172a;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: clamp(1.55rem, 2.2vw, 1.95rem);
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+h4 {
+  font-size: 1.02rem;
+}
+
+.section {
+  padding: 4.25rem 0;
+}
+
+#nav {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid #d1d5db;
+  box-shadow: none;
+}
+
+.nav-links a {
+  color: #4b5563;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #111827;
+  background: #f3f4f6;
+}
+
+.nav-logo-mark {
+  background: transparent;
+  color: inherit;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  padding: 0;
+}
+
+.nav-logo-mark img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.card,
+.lit-card,
+.gap-card,
+.rp-box,
+.comp-card,
+.tl-card,
+.doc-card,
+.slide-card,
+.team-card,
+.sup-card,
+.contact-form,
+.arch-diagram {
+  border-radius: 4px;
+  box-shadow: none;
+  border: 1px solid #d1d5db;
+}
+
+.btn {
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #111827;
+  border: 1px solid #111827;
+}
+
+.btn-primary:hover {
+  background: #1f2937;
+  border-color: #1f2937;
+}
+
+.btn-outline {
+  border: 1px solid #d1d5db;
+  color: #111827;
+  background: #ffffff;
+}
+
+.btn-outline:hover {
+  border-color: #9ca3af;
+  color: #111827;
+  background: #f9fafb;
+}
+
+.btn-teal {
+  color: #374151;
+  border-color: #d1d5db;
+  background: #ffffff;
+}
+
+.btn-teal:hover {
+  color: #111827;
+  border-color: #9ca3af;
+  background: #f9fafb;
+}
+
+.hero-grid,
+.hero-glow1,
+.hero-glow2,
+.q-mark {
+  display: none;
+}
+
+.hero h1 .accent,
+.hero h1 .accent2,
+.section-label,
+.team-card .team-role,
+.contact-detail-icon,
+.footer-right a:hover {
+  color: #1f2937;
+}
+
+.hero h1 .accent {
+  color: #111827;
+}
+
+.hero h1 .accent2 {
+  color: #111827;
+}
+
+.stat-num.g,
+.stat-num.t,
+.stat-num.gr,
+.stat-num.r {
+  color: #111827;
+}
+
+.tag,
+.tech-pill,
+.doc-icon,
+.doc-status,
+.nav-id {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #4b5563;
+  border-radius: 3px;
+}
+
+.section-label {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #374151;
+}
+
+.hero-sub {
+  max-width: 56ch;
+}
+
+/* Neutralize remaining semantic/accent classes to grayscale */
+.tag--gold,
+.tag--orange,
+.tag--teal,
+.tag--green,
+.tag--red,
+.doc-status.ready,
+.doc-status.pending,
+.arch-box,
+.arch-box.gold,
+.arch-box.green,
+.arch-box.red,
+.pipe-icon.gold,
+.pipe-icon.teal,
+.pipe-icon.green,
+.pipe-icon.red,
+.dot-outer,
+.dot-outer.teal,
+.dot-outer.green,
+.dot-outer.red,
+.dot-outer .dot-inner,
+.dot-outer.teal .dot-inner,
+.dot-outer.green .dot-inner,
+.dot-outer.red .dot-inner,
+.slide-thumb.t1,
+.slide-thumb.t2,
+.slide-thumb.t3,
+.slide-thumb.t4,
+.gap-card,
+.gap-card.sol,
+.rp-box,
+.sup-card,
+.sup-icon,
+.method-tab.active,
+.hero-badge-dot,
+.av1,
+.av2,
+.av3,
+.av4 {
+  background: #f3f4f6 !important;
+  border-color: #d1d5db !important;
+  color: #374151 !important;
+  box-shadow: none !important;
+}
+
+.tl-dot .dot-inner {
+  background: #6b7280 !important;
+}
+
+/* Convert hardcoded inline accent blocks in component area to grayscale */
+#components [style*="rgba(249,115,22"],
+#components [style*="rgba(16,185,129"],
+#components [style*="rgba(239,68,68"],
+#components [style*="color:var(--green)"],
+#components [style*="color:var(--red)"],
+#components [style*="color:var(--gold)"],
+#components [style*="color:var(--teal)"] {
+  background: #f9fafb !important;
+  border-color: #d1d5db !important;
+  color: #374151 !important;
+}
+
+#components h3[style*="color:var("],
+#components h4[style*="color:var("] {
+  color: #111827 !important;
+}
+
+p,
+.hero-sub,
+.tl-card p,
+.doc-card p,
+.slide-info p,
+.contact-info p,
+.team-email,
+.team-card p {
+  color: #4b5563;
+  line-height: 1.66;
+  max-width: 62ch;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.method-tab,
+.arch-box {
+  border-radius: 4px;
+}
+
+.metrics-table th {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.metrics-table td {
+  color: #374151;
+}
+
+.metrics-table tr.highlight td {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+#domain,
+#milestones,
+#documents,
+#about,
+#contact,
+#slides,
+#methodology {
+  background: transparent !important;
+}
+
+#components {
+  background: transparent !important;
+}
+
+.comp-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 0 1.2rem;
+  }
+
+  .comp-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-actions {
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-mark"><img src="assets/logo-v1.svg" alt="Foresto logo"/></div>
+      <div class="nav-logo-text">Foresto<span></span></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#domain">Domain</a>
+      <a href="#components">Components</a>
+      <a href="#milestones">Milestones</a>
+      <a href="#documents">Documents</a>
+      <a href="#slides">Presentations</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <span class="nav-id">25_26J_393</span>
+      <div class="hamburger" id="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section id="home">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow1"></div>
+    <div class="hero-glow2"></div>
+  </div>
+  <div class="container hero-content">
+    <div class="hero-badge reveal">
+      <div class="hero-badge-dot"></div>
+      <span class="hero-badge-text">Research Project · SLIIT · 2025–26 · 25-26J_393</span>
+    </div>
+    <h1 class="reveal">
+      AI-Driven <span class="accent">Demand Forecasting</span> &amp;<br/>
+      <span class="accent2">Waste Management</span> System<br/>
+      for Sri Lankan Restaurants
+    </h1>
+    <p class="hero-sub reveal">
+      An integrated, end-to-end AI platform that predicts menu demand, optimises ingredient procurement,
+      forecasts food prices, and empowers suppliers purpose-built for Sri Lanka's small-to-medium 
+      restaurant ecosystem.
+    </p>
+    <div class="hero-actions reveal">
+      <a href="#domain" class="btn btn-primary">Explore Research ↓</a>
+      <a href="#documents" class="btn btn-outline">View Documents</a>
+    </div>
+    
+</section>
+
+<!-- ════════════════ DOMAIN ════════════════ -->
+<section id="domain" class="section">
+  <div class="container">
+    <p class="section-label reveal">Domain Overview</p>
+    <div class="domain-intro reveal">
+      <h2>Background &amp; Literature Survey</h2>
+      <p>
+        Small-to medium-sized restaurants in Sri Lanka face chronic operational inefficiencies driven by unpredictable 
+        demand, seasonal price volatility, and limited access to data-driven tools. Manual estimation, ad-hoc 
+        supplier relationships, and no structured waste tracking result in stock-outs, over-purchasing, and 
+        significant food waste — challenges that established solutions from large supply-chain contexts cannot 
+        directly address.
+      </p>
+    </div>
+
+    <!-- Literature Cards -->
+    <div class="lit-grid">
+        <div class="lit-card reveal">
+          <div class="lit-icon">01</div>
+          <h4>Time-Series Forecasting</h4>
+          <p>ARIMA and exponential smoothing are well-established for short-term commodity prediction. However, they fail to capture nonlinear demand patterns and Sri Lanka–specific cultural surges.</p>
+        </div>
+        <div class="lit-card reveal">
+          <div class="lit-icon">02</div>
+          <h4>Machine Learning Approaches</h4>
+          <p>Random Forest, Gradient Boosting (LightGBM), and LSTM networks outperform classical methods on volatile, multivariate datasets. Most existing implementations assume large, clean historical data.</p>
+        </div>
+        <div class="lit-card reveal">
+          <div class="lit-icon">03</div>
+          <h4>Supplier Recommendation Systems</h4>
+          <p>Multi-Criteria Decision Making (MCDM) with AHP and ML-based ranking evaluate suppliers by cost, reliability, and freshness — primarily in large supply chains.</p>
+        </div>
+        <div class="lit-card reveal">
+          <div class="lit-icon">04</div>
+          <h4>Privacy-Preserving Forecasting</h4>
+          <p>Federated Learning enables collaborative model training without sharing raw sales data. Differential Privacy and secure multi-party computation supplement this for SME settings.</p>
+        </div>
+        <div class="lit-card reveal">
+          <div class="lit-icon">05</div>
+          <h4>Waste Management &amp; Inventory</h4>
+          <p>EOQ and JIT models optimise static inventory but cannot adapt to perishable, demand-volatile restaurant environments. AI-powered adaptive buffers offer dynamic correction.</p>
+        </div>
+        <div class="lit-card reveal">
+          <div class="lit-icon">06</div>
+          <h4>External Variable Integration</h4>
+          <p>Weather data, cultural calendars, and temporal features significantly improve demand forecast accuracy for hospitality businesses — yet remain underutilised in small-scale settings.</p>
+        </div>
+    </div>
+
+    <!-- Research Gap -->
+    <p class="section-label reveal">Research Gap</p>
+    <h2 class="reveal">What the Literature Missed</h2>
+    <div class="gap-grid reveal">
+      <div class="gap-card">
+        <h4>Low-Data Models Absent</h4>
+        <p>Existing forecasting frameworks require large, structured datasets unavailable to typical Sri Lankan restaurants that maintain only manual logbooks.</p>
+      </div>
+      <div class="gap-card">
+        <h4>Siloed Forecasting</h4>
+        <p>Most tools predict demand in isolation without converting forecasts into recipe-mapped ingredient procurement plans, making outputs non-actionable.</p>
+      </div>
+      <div class="gap-card">
+        <h4>No Operational Feedback</h4>
+        <p>Inventory buffers are set statically and never adjusted based on actual kitchen waste — missing a critical closed-loop feedback mechanism.</p>
+      </div>
+      <div class="gap-card">
+        <h4>Privacy Barriers</h4>
+        <p>Restaurant owners resist sharing raw transactional data with suppliers, yet collaborative forecasting requires some form of aggregated demand intelligence.</p>
+      </div>
+      <div class="gap-card sol">
+        <h4>Our Contribution</h4>
+        <p>An integrated end-to-end system combining lightweight hybrid forecasting, adaptive waste-driven inventory control, price prediction, and privacy-preserving supplier dashboards.</p>
+      </div>
+      <div class="gap-card sol">
+        <h4>Context-Aware Sri Lanka Focus</h4>
+        <p>Incorporates the Sri Lankan cultural calendar, local weather, and SME operational realities — features no existing solution currently addresses holistically.</p>
+      </div>
+    </div>
+
+    <!-- Research Problem -->
+    <div class="rp-box reveal">
+      <div class="q-mark">"</div>
+      <h3>Research Problem</h3>
+      <p>
+        How can an integrated system be created that forecasts restaurant menu demand, anticipates ingredient price 
+        fluctuations, recommends reliable suppliers, and reduces food waste — specifically for Sri Lankan restaurants 
+        operating with limited structured data, low digital infrastructure, and privacy-sensitive supply relationships?
+      </p>
+    </div>
+
+    <!-- Objectives -->
+    <div class="objectives-section reveal">
+      <p class="section-label">Research Objectives</p>
+      <h2>What This Project Achieves</h2>
+      <div class="obj-cols" style="margin-top:1.5rem">
+        <ul class="obj-list">
+          <li>Develop a hybrid ML + rule-based demand forecasting model tailored for data-scarce Sri Lankan SMEs</li>
+          <li>Integrate cultural calendar and weather data to capture local demand surges accurately</li>
+          <li>Build an adaptive inventory buffer driven by actual kitchen waste via exponential smoothing</li>
+          <li>Predict weekly and monthly food selling prices using ARIMA, Prophet, Regression, and LSTM models</li>
+        </ul>
+        <ul class="obj-list">
+          <li>Implement a supplier ranking and recommendation engine based on cost, reliability, and freshness</li>
+          <li>Design a privacy-preserving supplier demand forecasting dashboard using federated learning</li>
+          <li>Deliver an intuitive, low-literacy-friendly interface for non-technical restaurant owners</li>
+          <li>Validate accuracy using MAE, RMSE, R², and MAPE against baseline and static-buffer methods</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Technologies -->
+    <div class="reveal" style="margin-top:3rem">
+      <p class="section-label">Technologies Used</p>
+      <h2 style="margin-bottom:1.5rem">Tech Stack</h2>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <span class="tech-pill">Python 3.10+</span><span class="tech-pill">LightGBM</span><span class="tech-pill">Facebook Prophet</span>
+        <span class="tech-pill">ARIMA / Statsmodels</span><span class="tech-pill">LSTM / TensorFlow</span><span class="tech-pill">Scikit-learn</span>
+        <span class="tech-pill">Next.js / React</span><span class="tech-pill">Django REST Framework</span><span class="tech-pill">PostgreSQL</span>
+        <span class="tech-pill">MongoDB</span><span class="tech-pill">Firebase Firestore</span><span class="tech-pill">OpenWeatherMap API</span>
+        <span class="tech-pill">Pandas / NumPy</span><span class="tech-pill">Tailwind CSS</span><span class="tech-pill">XGBoost</span>
+        <span class="tech-pill">TypeScript</span><span class="tech-pill">Joblib</span><span class="tech-pill">FastAPI</span>
+        <span class="tech-pill">GitHub</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ COMPONENTS ════════════════ -->
+<section id="components" class="section" style="background:var(--navy3)">
+  <div class="container">
+    <p class="section-label reveal">System Components</p>
+    <h2 class="reveal">Four Integrated Research Components</h2>
+    <p class="reveal" style="max-width:700px;margin-top:.75rem;font-size:1rem">
+      Each component is independently developed and seamlessly integrated into a unified decision-support 
+      pipeline for Sri Lankan restaurants and their suppliers.
+    </p>
+
+    <!-- COMPONENT 1 -->
+    <div style="margin-top:3.5rem" class="reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+        <span class="tag tag--gold">Component 01</span>
+        <h3 style="color:var(--gold)">Lightweight Hybrid Food Demand Forecaster</h3>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem" class="comp-detail">
+        <div>
+          <p style="font-size:.95rem;margin-bottom:1.25rem">
+            The foundational forecasting engine of the system. Designed specifically for small Sri Lankan 
+            restaurants with limited historical data, this component combines a lightweight ML core 
+            with a weighted fuzzy-logic contextual engine to produce context-aware daily and weekly 
+            demand predictions.
+          </p>
+          <p style="font-size:.88rem;color:var(--muted);margin-bottom:1.25rem">
+            The ML core uses <strong style="color:var(--text)">LightGBM</strong> and <strong style="color:var(--text)">Facebook Prophet</strong> 
+            models trained on historical sales data augmented with engineered temporal features — lag-1, lag-7, 
+            and rolling averages. The contextual engine overlays real-time OpenWeatherMap meteorological data 
+            and a standardised Sri Lankan cultural calendar (Vesak, Sinhala New Year, Poya Days) to refine predictions.
+          </p>
+          <p style="font-size:.88rem;color:var(--muted)">
+            Unlike binary rule triggers, the system applies <strong style="color:var(--text)">Fuzzy Logic Scaling</strong> — 
+            a continuous adjustment factor (δ) that gradually reduces forecasts as rainfall intensifies rather 
+            than switching on/off. Overlapping modifiers (e.g., festival during a storm) are resolved via a 
+            <strong style="color:var(--text)">Weighted Priority Hierarchy</strong>.
+          </p>
+
+          <div style="margin-top:1.5rem;background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:1.25rem">
+            <p style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--gold);margin-bottom:.5rem">FINAL FORECAST FORMULA</p>
+            <p style="font-family:'DM Mono',monospace;font-size:.82rem;color:var(--text)">
+              Ŷ<sub>final</sub> = Ŷ<sub>base</sub> × (Σ w<sub>i</sub>δ<sub>i</sub>) / Σ w<sub>i</sub>
+            </p>
+            <p style="font-size:.78rem;color:var(--muted);margin-top:.4rem">
+              Where Ŷ<sub>base</sub> = calibrated ML baseline, δ<sub>i</sub> = fuzzy adjustment factor, 
+              w<sub>i</sub> = historical reliability weight
+            </p>
+          </div>
+
+          <div style="margin-top:1.25rem">
+            <p style="font-size:.8rem;color:var(--muted);margin-bottom:.4rem">Research Gap Addressed</p>
+            <p style="font-size:.88rem;color:var(--muted)">
+              Existing models assume large, clean data. This component uses proxy data (supplier invoices, logbooks), 
+              operates on &lt;1 year of records, and encodes domain expert knowledge through transparent 
+              rule-based overrides — making it the first forecasting system tailored to Sri Lankan SME constraints.
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="arch-diagram">
+            <p style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);margin-bottom:1rem">SYSTEM ARCHITECTURE — COMPONENT 01</p>
+            <div class="arch-row">
+              <div class="arch-box">Manual Sales CSV</div>
+              <div class="arch-box">Supplier Invoices</div>
+              <div class="arch-box">OpenWeatherMap API</div>
+              <div class="arch-box">Sri Lankan Cultural Calendar</div>
+            </div>
+            <div class="arch-row"><div class="arch-arrow">↓</div></div>
+            <div class="arch-row">
+              <div class="arch-box gold">Data Preprocessing<br/><span style="font-size:.65rem">Cleaning · Feature Engineering · Lag / Rolling</span></div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-arrow" style="margin-right:3rem">↙</div>
+              <div class="arch-arrow" style="margin-left:3rem">↘</div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-box teal">ML Core<br/><span style="font-size:.65rem">LightGBM + Prophet</span></div>
+              <div class="arch-box green">Contextual Engine<br/><span style="font-size:.65rem">Fuzzy Logic · Weighted Rules</span></div>
+            </div>
+            <div class="arch-row"><div class="arch-arrow">↘ &nbsp; ↙</div></div>
+            <div class="arch-row">
+              <div class="arch-box gold">Final Demand Forecast<br/><span style="font-size:.65rem">Ŷ<sub>final</sub> = Ŷ<sub>base</sub> × Contextual Modifier</span></div>
+            </div>
+          </div>
+          <table class="metrics-table" style="margin-top:1.5rem">
+            <thead><tr><th>Model</th><th>MAE</th><th>RMSE</th><th>R²</th><th>MAPE</th></tr></thead>
+            <tbody>
+              <tr class="highlight"><td>Proposed Hybrid Model</td><td>3.42</td><td>4.89</td><td>0.88</td><td>12.5%</td></tr>
+              <tr><td>LightGBM (standalone)</td><td>3.42</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>Facebook Prophet</td><td>5.12</td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tech-pill">LightGBM</span><span class="tech-pill">Facebook Prophet</span><span class="tech-pill">Fuzzy Logic</span>
+            <span class="tech-pill">Scikit-learn</span><span class="tech-pill">OpenWeatherMap</span><span class="tech-pill">Next.js</span>
+            <span class="tech-pill">Django DRF</span><span class="tech-pill">TimeSeriesSplit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- divider -->
+    <hr style="border:none;border-top:1px solid var(--border);margin:4rem 0"/>
+
+    <!-- COMPONENT 2 -->
+    <div class="reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+        <span class="tag tag--teal">Component 02</span>
+        <h3 style="color:var(--teal)">AI-Enabled Inventory &amp; Reorder Management System</h3>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem" class="comp-detail">
+        <div>
+          <p style="font-size:.95rem;margin-bottom:1.25rem">
+            This component transforms demand forecasts into physical inventory actions. It computes total 
+            ingredient requirements through recipe mapping, dynamically calculates reorder thresholds, 
+            and features a pioneering <strong style="color:var(--teal)">Adaptive Buffer Algorithm</strong> that 
+            continuously updates safety stock levels using actual kitchen waste data.
+          </p>
+          <p style="font-size:.88rem;color:var(--muted);margin-bottom:1.25rem">
+            The dynamic inventory planner calculates the target stock level as:
+          </p>
+          <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem">
+            <p style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--teal);margin-bottom:.5rem">TARGET STOCK CALCULATION</p>
+            <p style="font-family:'DM Mono',monospace;font-size:.82rem">S<sub>target</sub> = L<sub>reorder</sub> + B<sub>size</sub></p>
+            <p style="font-family:'DM Mono',monospace;font-size:.82rem;margin-top:.4rem">B<sub>target</sub> = W<sub>avg</sub> × D<sub>buffer</sub></p>
+            <p style="font-family:'DM Mono',monospace;font-size:.82rem;margin-top:.4rem">B<sub>new</sub> = B<sub>old</sub>(1 − α) + B<sub>target</sub> · α</p>
+            <p style="font-size:.75rem;color:var(--muted);margin-top:.5rem">
+              α = smoothing factor · W<sub>avg</sub> = mean daily waste over lookback window
+            </p>
+          </div>
+          <p style="font-size:.88rem;color:var(--muted);margin-bottom:1rem">
+            The adaptive buffer treats kitchen waste as an active data signal rather than a passive metric. 
+            By tracking daily unsold food and applying exponential smoothing, the system autonomously corrects 
+            safety buffers without human intervention — linking predictive analytics with real kitchen operations.
+          </p>
+          <p style="font-size:.88rem;color:var(--muted)">
+            The Next.js / React frontend presents complex risk states (OK / Low / Stockout) in a simple, 
+            visually intuitive dashboard, purpose-designed for restaurant staff with limited digital literacy.
+          </p>
+          <div style="margin-top:1.5rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tech-pill">Next.js / React</span><span class="tech-pill">TypeScript</span>
+            <span class="tech-pill">Django REST Framework</span><span class="tech-pill">PostgreSQL</span>
+            <span class="tech-pill">Joblib</span><span class="tech-pill">Tailwind CSS</span>
+            <span class="tech-pill">Exponential Smoothing</span><span class="tech-pill">Recipe Mapping Engine</span>
+          </div>
+        </div>
+        <div>
+          <div class="arch-diagram">
+            <p style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);margin-bottom:1rem">ADAPTIVE BUFFER FEEDBACK LOOP</p>
+            <div class="arch-row"><div class="arch-box gold">Menu Demand Forecast (from Component 01)</div></div>
+            <div class="arch-row"><div class="arch-arrow">↓</div></div>
+            <div class="arch-row"><div class="arch-box teal">Recipe Mapping Engine<br/><span style="font-size:.65rem">Forecast → Ingredient Quantities</span></div></div>
+            <div class="arch-row"><div class="arch-arrow">↓</div></div>
+            <div class="arch-row">
+              <div class="arch-box">Dynamic Inventory Planner<br/><span style="font-size:.65rem">S<sub>target</sub> = L<sub>reorder</sub> + B<sub>size</sub></span></div>
+              <div class="arch-box green">Adaptive Buffer Algorithm<br/><span style="font-size:.65rem">B<sub>new</sub> = B<sub>old</sub>(1−α) + B<sub>target</sub>α</span></div>
+            </div>
+            <div class="arch-row"><div class="arch-arrow">↓</div></div>
+            <div class="arch-row"><div class="arch-box teal">Purchase Orders → Supplier</div></div>
+            <div class="arch-row"><div class="arch-arrow">↓</div></div>
+            <div class="arch-row"><div class="arch-box red">Kitchen Waste Tracking (Daily Input)</div></div>
+            <div style="margin-top:.5rem;border:1px dashed rgba(255,255,255,.15);border-radius:8px;padding:.5rem;font-size:.68rem;color:var(--muted)">↑ Waste feeds back to update buffer automatically</div>
+          </div>
+          <div style="margin-top:1.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem">
+            <div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:1rem;text-align:center">
+              <div style="font-size:1.5rem;font-family:'Playfair Display',serif;color:var(--green)">↓</div>
+              <div style="font-size:.75rem;color:var(--muted);margin-top:.25rem">Food Waste Reduced</div>
+            </div>
+            <div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:8px;padding:1rem;text-align:center">
+              <div style="font-size:1.5rem;font-family:'Playfair Display',serif;color:var(--teal)">&lt;5%</div>
+              <div style="font-size:.75rem;color:var(--muted);margin-top:.25rem">Stockout Rate</div>
+            </div>
+            <div style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:8px;padding:1rem;text-align:center">
+              <div style="font-size:1.5rem;font-family:'Playfair Display',serif;color:var(--gold)">30d</div>
+              <div style="font-size:.75rem;color:var(--muted);margin-top:.25rem">Simulation Period</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:4rem 0"/>
+
+    <!-- COMPONENT 3 -->
+    <div class="reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+        <span class="tag tag--red">Component 03</span>
+        <h3 style="color:var(--red)">Food Price Prediction &amp; Supplier Recommendation</h3>
+      </div>
+      <div style="margin-bottom:.75rem;font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted)">
+        Fernando W.G.P.N &nbsp;·&nbsp; IT22261946 &nbsp;·&nbsp; B.Sc. (Hons) IT — SLIIT
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem" class="comp-detail">
+        <div>
+          <p style="font-size:.95rem;margin-bottom:1.25rem">
+            Most Sri Lankan restaurants rely on manual cost estimation with no predictive capability for 
+            ingredient price fluctuations. This component delivers a <strong style="color:var(--text)">machine 
+            learning–based food price prediction engine</strong> and an intelligent <strong style="color:var(--text)">
+            supplier ranking and recommendation system</strong> — integrated into a unified decision-support interface.
+          </p>
+
+          <h4 style="font-family:'Playfair Display',serif;color:var(--text);margin-bottom:.6rem">Food Price Prediction Model</h4>
+          <p style="font-size:.88rem;color:var(--muted);margin-bottom:1rem">
+            Using historical food selling prices, ingredient cost data, and current market prices, the component 
+            forecasts weekly and monthly dish selling prices. Models benchmarked include ARIMA, Prophet, 
+            Regression, and LSTM — evaluated on RMSE, MAPE, and R².
+          </p>
+          <p style="font-size:.88rem;color:var(--muted);margin-bottom:1.25rem">
+            Feature engineering enriches the dataset with rolling price averages, seasonal indicators, 
+            and a computed cost index per dish. Dish-ingredient ratio mapping and supplier-ingredient 
+            mapping enable precise cost-to-price linkage.
+          </p>
+
+          <h4 style="font-family:'Playfair Display',serif;color:var(--text);margin-bottom:.6rem">Supplier Recommendation Engine</h4>
+          <p style="font-size:.88rem;color:var(--muted)">
+            A multi-criteria ranking algorithm scores each supplier on cost efficiency, delivery reliability, 
+            and freshness ratings. AHP-based MCDM ensures transparent, explainable recommendations. 
+            The system alerts restaurant owners when significant price fluctuations are detected and 
+            supports PDF/Excel export of supplier rankings.
+          </p>
+          <div style="margin-top:1.5rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tech-pill">ARIMA</span><span class="tech-pill">Facebook Prophet</span>
+            <span class="tech-pill">LSTM / TensorFlow</span><span class="tech-pill">Scikit-learn</span>
+            <span class="tech-pill">AHP / MCDM</span><span class="tech-pill">SQLite / MongoDB</span>
+            <span class="tech-pill">React (Optional UI)</span><span class="tech-pill">WhatsApp Business API</span>
+          </div>
+        </div>
+        <div>
+          <div class="arch-diagram">
+            <p style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);margin-bottom:1rem">SYSTEM ARCHITECTURE — COMPONENT 03</p>
+            <div class="arch-row">
+              <div class="arch-box">Historical Ingredient Data &amp; Market Prices</div>
+              <div class="arch-box">Supplier Price Rates</div>
+              <div class="arch-box">Historical Food Sales Dataset</div>
+            </div>
+            <div class="arch-row"><div class="arch-arrow">↓ ↓ ↓</div></div>
+            <div class="arch-row">
+              <div class="arch-box gold">Data Preprocessing<br/><span style="font-size:.65rem">Cost-price mapping · Dish-ingredient ratio · Supplier mapping</span></div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-arrow" style="margin-right:3rem">↙</div>
+              <div class="arch-arrow" style="margin-left:3rem">↘</div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-box teal">Price Prediction<br/><span style="font-size:.65rem">ARIMA · Prophet · LSTM · Regression</span></div>
+              <div class="arch-box green">Supplier Rating ML<br/><span style="font-size:.65rem">Cost · Reliability · Freshness</span></div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-arrow" style="margin-right:2rem">↓</div>
+              <div class="arch-arrow" style="margin-left:2rem">↓</div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-box">Optimised Selling Price<br/><span style="font-size:.65rem">Weekly / Monthly</span></div>
+              <div class="arch-box">Best Supplier per Ingredient</div>
+            </div>
+            <div class="arch-row"><div class="arch-arrow">↘ &nbsp; ↙</div></div>
+            <div class="arch-row"><div class="arch-box gold">Decision Support UI — Suggest Prices · Recommend Suppliers</div></div>
+          </div>
+          <div style="margin-top:1.5rem">
+            <p style="font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:.75rem">KEY FUNCTIONAL REQUIREMENTS</p>
+            <ul style="list-style:none;font-size:.82rem;color:var(--muted)">
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">Weekly and monthly dish price predictions</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">Best supplier ranked per ingredient</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">Price-spike alerts via WhatsApp or notifications</li>
+              <li style="padding:.3rem 0;border-bottom:1px solid var(--border)">Decision-support report generation</li>
+              <li style="padding:.3rem 0">PDF and Excel export for business use</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:4rem 0"/>
+
+    <!-- COMPONENT 4 -->
+    <div class="reveal">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+        <span class="tag tag--green">Component 04</span>
+        <h3 style="color:var(--green)">Supplier Demand Forecasting Dashboard</h3>
+      </div>
+      <div style="margin-bottom:.75rem;font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted)">
+        Alawaththa A.K.A.A &nbsp;·&nbsp; IT22249470 &nbsp;·&nbsp; B.Sc. (Hons) IT — SLIIT
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem" class="comp-detail">
+        <div>
+          <p style="font-size:.95rem;margin-bottom:1.25rem">
+            Small suppliers serving Sri Lankan restaurants lack demand visibility, leading to inefficient 
+            delivery scheduling and stock imbalances. This component builds a <strong style="color:var(--text)">
+            privacy-preserving supplier demand forecasting dashboard</strong> that aggregates ingredient-level 
+            demand signals from multiple restaurants without exposing raw sales data.
+          </p>
+
+          <h4 style="font-family:'Playfair Display',serif;color:var(--text);margin-bottom:.6rem">Forecasting Models</h4>
+          <p style="font-size:.88rem;color:var(--muted);margin-bottom:1rem">
+            The system collects dish-level sales data from restaurants, converts it to ingredient-level 
+            demand via predefined recipes, and applies an ensemble of ARIMA (stationary time-series), 
+            Holt-Winters (trend + seasonality), and Random Forest Regression (nonlinear demand) 
+            models — weighted by rolling MAPE/RMSE performance.
+          </p>
+
+          <h4 style="font-family:'Playfair Display',serif;color:var(--text);margin-bottom:.6rem">Privacy-Preserving Aggregation</h4>
+          <p style="font-size:.88rem;color:var(--muted);margin-bottom:1rem">
+            Using <strong style="color:var(--text)">Federated Learning (FL)</strong>, each restaurant trains 
+            its local model and shares only model parameters (gradients) — never raw transactional data. 
+            An optional Differential Privacy layer adds controlled noise to further protect individual 
+            restaurant identity. This approach enables collaborative forecasting while maintaining 
+            competitive confidentiality.
+          </p>
+
+          <h4 style="font-family:'Playfair Display',serif;color:var(--text);margin-bottom:.6rem">Inventory Optimisation Logic</h4>
+          <p style="font-size:.88rem;color:var(--muted)">
+            Supplier-facing reorder points are computed using Economic Order Quantity (EOQ) and safety 
+            stock from forecast error. The interactive dashboard (React/Dash) provides time-series 
+            demand graphs, inventory heatmaps, stockout/overstock alerts, and drill-down analysis 
+            with CSV/PDF export.
+          </p>
+          <div style="margin-top:1.5rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <span class="tech-pill">ARIMA</span><span class="tech-pill">Holt-Winters</span>
+            <span class="tech-pill">Random Forest</span><span class="tech-pill">Federated Learning</span>
+            <span class="tech-pill">Differential Privacy</span><span class="tech-pill">React / Dash</span>
+            <span class="tech-pill">Python / Pandas</span><span class="tech-pill">SQL / MongoDB</span>
+            <span class="tech-pill">AWS / Azure</span><span class="tech-pill">WhatsApp API</span>
+          </div>
+        </div>
+        <div>
+          <div class="arch-diagram">
+            <p style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);margin-bottom:1rem">SYSTEM ARCHITECTURE — COMPONENT 04</p>
+            <div class="arch-row">
+              <div class="arch-box">Restaurant App<br/><span style="font-size:.65rem">Mobile / Web</span></div>
+              <div class="arch-box">Local Store<br/><span style="font-size:.65rem">Recipes · Daily Logs</span></div>
+            </div>
+            <div class="arch-row"><div class="arch-arrow">↓</div></div>
+            <div class="arch-row"><div class="arch-box gold">API Gateway &amp; Auth</div></div>
+            <div class="arch-row">
+              <div class="arch-arrow" style="margin-right:2rem">↙</div>
+              <div class="arch-arrow" style="margin-left:2rem">↘</div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-box teal">Forecasting Service<br/><span style="font-size:.65rem">ARIMA · Holt-Winters · RF</span></div>
+              <div class="arch-box green">Aggregation Service<br/><span style="font-size:.65rem">Privacy-Preserving (FL)</span></div>
+            </div>
+            <div class="arch-row"><div class="arch-arrow">↘ &nbsp; ↙</div></div>
+            <div class="arch-row"><div class="arch-box">Data Store<br/><span style="font-size:.65rem">Forecasts · Inventory</span></div></div>
+            <div class="arch-row"><div class="arch-arrow">↓</div></div>
+            <div class="arch-row"><div class="arch-box gold">Supplier Dashboard (Web)<br/><span style="font-size:.65rem">Forecasts · Heatmaps · Alerts · EOQ</span></div></div>
+            <div class="arch-row"><div class="arch-arrow">↓</div></div>
+            <div class="arch-row"><div class="arch-box red">Notification Service<br/><span style="font-size:.65rem">SMS · Email · WhatsApp</span></div></div>
+          </div>
+          <div style="margin-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+            <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);border-radius:8px;padding:1rem;font-size:.82rem;color:var(--muted)">
+              <strong style="color:var(--green);display:block;margin-bottom:.25rem">Primary Metrics</strong>
+              MAE · RMSE · MAPE<br/>Stockout Reduction<br/>Spoilage Reduction
+            </div>
+            <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.18);border-radius:8px;padding:1rem;font-size:.82rem;color:var(--muted)">
+              <strong style="color:var(--teal);display:block;margin-bottom:.25rem">Secondary Metrics</strong>
+              Dashboard Satisfaction<br/>Cost Savings / Store<br/>System Reliability
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ MILESTONES ════════════════ -->
+<section id="milestones" class="section">
+  <div class="container">
+    <p class="section-label reveal">Project Timeline</p>
+    <h2 class="reveal">Milestones &amp; Assessments</h2>
+    <p class="reveal" style="max-width:600px;margin-top:.75rem;font-size:.95rem;margin-bottom:1.5rem">
+      All four components follow the academic year timeline (September 2025 – August 2026), 
+      spanning data collection through final presentation.
+    </p>
+
+    <div class="timeline reveal">
+
+      <div class="tl-item">
+        <div class="tl-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+        <div class="tl-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem">
+            <h4>Project Proposal</h4>
+            <span class="tag tag--green">Completed</span>
+          </div>
+          <div class="meta" style="margin-top:.5rem">
+            <span>Date: 08th September 2025</span>
+            <span>Assessment 01</span>
+          </div>
+          <p>Individual proposal reports submitted by all four team members. Research gaps identified, methodologies defined, and systems architectures drafted for all four components.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"><div class="dot-outer teal"><div class="dot-inner"></div></div></div>
+        <div class="tl-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem">
+            <h4>Progress Presentation I</h4>
+            <span class="tag tag--green">Completed</span>
+          </div>
+          <div class="meta" style="margin-top:.5rem">
+            <span>Date: 09th January 2026</span>
+            <span>Assessment 02</span>
+          </div>
+          <p>Data collection completed, preprocessing pipelines built, and initial ML model training underway for all components. Baseline forecasting models benchmarked.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+        <div class="tl-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem">
+            <h4>Progress Presentation II</h4>
+            <span class="tag tag--green">Completed</span>
+          </div>
+          <div class="meta" style="margin-top:.5rem">
+            <span>Date: 9th March 2026</span>
+            <span>Assessment 03</span>
+          </div>
+          <p>Full system integration milestone. Hybrid forecaster integrated with inventory management. Supplier dashboard connected with federated learning layer. End-to-end pipeline functional and under evaluation.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+        <div class="tl-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem">
+            <h4>Final Assessment &amp; Viva</h4>
+            <span class="tag tag--teal">Upcoming</span>
+          </div>
+          <div class="meta" style="margin-top:.5rem">
+            <span>Date: 4th May 2026</span>
+            <span>Final Assessment</span>
+          </div>
+          <p>Final research paper submitted. All four system components validated against holdout datasets. Viva voce conducted.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Gantt overview -->
+    <div class="reveal" style="margin-top:3rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;overflow-x:auto">
+      <p class="section-label" style="margin-bottom:1.25rem">Schedule Overview</p>
+      <div id="gantt-chart-container" style="min-width: 800px;">
+        <!-- Gantt chart will be rendered here by JavaScript -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ DOCUMENTS ════════════════ -->
+<section id="documents" class="section" style="background:var(--navy2)">
+  <div class="container">
+    <p class="section-label reveal">Research Documents</p>
+    <h2 class="reveal">Project Documents</h2>
+    <p class="reveal" style="font-size:.9rem;max-width:650px;margin-top:.75rem">
+      All project documentation including proposal reports, checklists, and the final research paper.
+      Download links will be updated as documents are finalised.
+    </p>
+
+    <div class="doc-grid reveal">
+
+      <div class="doc-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="doc-icon">DC</div>
+          <span class="doc-status ready">Available</span>
+        </div>
+        <div class="doc-title">Project Charter</div>
+        <p style="font-size:.9rem;color:var(--muted)">Initial project charter defining scope, team roles, and research objectives for Project 25_26J_393.</p>
+        <div class="doc-actions">
+          <a href="./assets/TAF_25-26J-393.pdf" class="btn btn-teal" download>Download</a>
+          <a href="./assets/TAF_25-26J-393.pdf" class="btn btn-outline">View</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="doc-icon">PR</div>
+          <span class="doc-status ready">Available</span>
+        </div>
+        <div class="doc-title">Proposal Report — Thilakarathna W.P.N.S.</div>
+        <p style="font-size:.9rem;color:var(--muted)">IT22073846 · Lightweight Hybrid Food Demand Forecaster component proposal.</p>
+        <div class="doc-actions">
+          <a href="assets/Proposal Report - Thilakarathna WPNS.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Proposal Report - Thilakarathna WPNS.pdf" class="btn btn-outline">View</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="doc-icon">PR</div>
+          <span class="doc-status ready">Available</span>
+        </div>
+        <div class="doc-title">Proposal Report — Jayathunga A.G.I.A.</div>
+        <p style="font-size:.9rem;color:var(--muted)">IT22642950 · AI Enabled Inventory Management System</p>
+        <div class="doc-actions">
+          <a href="assets/Proposal Report - Jayathunga AGIA.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Proposal Report - Jayathunga AGIA.pdf" class="btn btn-outline">View</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="doc-icon">PR</div>
+          <span class="doc-status ready">Available</span>
+        </div>
+        <div class="doc-title">Proposal Report — Fernando W.G.P.N</div>
+        <p style="font-size:.9rem;color:var(--muted)">IT22261946 · Food Price Prediction &amp; Supplier Recommendation component proposal.</p>
+        <div class="doc-actions">
+          <a href="assets/Proposal Report - Fernando WGPN.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Proposal Report - Fernando WGPN.pdf" class="btn btn-outline">View</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="doc-icon">PR</div>
+          <span class="doc-status ready">Available</span>
+        </div>
+        <div class="doc-title">Proposal Report — Alawaththa A.K.A.A</div>
+        <p style="font-size:.9rem;color:var(--muted)">IT22249470 · Supplier Demand Forecasting Dashboard component proposal.</p>
+        <div class="doc-actions">
+          <a href="assets/Proposal Report - Alawaththa AKAA.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Proposal Report - Alawaththa AKAA.pdf" class="btn btn-outline">View</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="doc-icon">CL</div>
+          <span class="doc-status pending">In Progress</span>
+        </div>
+        <div class="doc-title">Checklist Documents</div>
+        <p style="font-size:.9rem;color:var(--muted)">Assessment checklists and milestone compliance documents for all project phases.</p>
+        <div class="doc-actions">
+          <a href="#" class="btn btn-outline" style="cursor:not-allowed;opacity:.5">Pending</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="doc-icon">RD</div>
+          <span class="doc-status pending">In Progress</span>
+        </div>
+        <div class="doc-title">Research Paper — Draft V1</div>
+        <p style="font-size:.9rem;color:var(--muted)">Combined research paper covering Components 01 &amp; 02 (IEEE format). Currently under revision.</p>
+        <div class="doc-actions">
+          <a href="assets/Research Paper Draft.pdf" class="btn btn-teal" download>Download</a>
+          <a href="assets/Research Paper Draft.pdf" class="btn btn-outline">View</a>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="doc-icon">FR</div>
+          <span class="doc-status pending">Pending</span>
+        </div>
+        <div class="doc-title">Final Research Document (All 4 Components)</div>
+        <p style="font-size:.9rem;color:var(--muted)">Complete final research document integrating all four components — due August 2026.</p>
+        <div class="doc-actions">
+          <a href="#" class="btn btn-outline" style="cursor:not-allowed;opacity:.5">Pending</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SLIDES ════════════════ -->
+<section id="slides" class="section" style="background:var(--navy)">
+  <div class="container">
+    <p class="section-label reveal">Presentations</p>
+    <h2 class="reveal">Slides of Past Presentations</h2>
+    <p class="reveal" style="font-size:.9rem;max-width:600px;margin-top:.75rem">
+      Presentation decks from all assessment milestones. Future presentations will be added here upon completion.
+    </p>
+
+    <div class="slides-grid reveal">
+
+      <div class="slide-card">
+        <div class="slide-thumb t1">01</div>
+        <div class="slide-info">
+          <h4>Proposal Presentation</h4>
+          <p>Initial research proposal presentation covering all four components, research gaps, and methodology overview.</p>
+          <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.5rem">
+            <span class="tag tag--green">Completed</span>
+            <span style="font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted)">08th September 2025</span>
+          </div>
+          <div class="actions">
+            <a href="#" class="btn btn-teal" onclick="downloadPlaceholder(event,'Proposal_Slides.pptx')">Download</a>
+            <a href="#" class="btn btn-outline">View</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-thumb t2">02</div>
+        <div class="slide-info">
+          <h4>Progress Presentation I</h4>
+          <p>Interim results from data collection, preprocessing pipelines, and initial model training across all components.</p>
+          <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.5rem">
+            <span class="tag tag--green">Completed</span>
+            <span style="font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted)">7th January 2026</span>
+          </div>
+            <div class="actions">
+              <a href="assets/Progress Presentation 1.pptx" class="btn btn-teal" download>Download</a>
+              <a href="assets/Progress Presentation 1.pptx" class="btn btn-outline" target="_blank">View</a>
+            </div>
+        </div>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-thumb t3">03</div>
+        <div class="slide-info">
+          <h4>Progress Presentation II</h4>
+          <p>Full integration showcase — hybrid forecaster pipeline, adaptive buffer algorithm live demo, and supplier dashboard.</p>
+          <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.5rem">
+            <span class="tag tag--green">Completed</span>
+            <span style="font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted)">9th March 2026</span>
+          </div>
+            <div class="actions">
+              <a href="assets/Progress Presentation 2.pptx" class="btn btn-teal" download>Download</a>
+              <a href="assets/Progress Presentation 2.pptx" class="btn btn-outline" target="_blank">View</a>
+            </div>
+        </div>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide-thumb t4">04</div>
+        <div class="slide-info">
+          <h4>Final Presentation</h4>
+          <p>Comprehensive final results, system evaluation metrics, waste reduction outcomes, and business impact analysis.</p>
+          <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.5rem">
+            <span class="tag tag--teal">Upcoming</span>
+            <span style="font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted)">4th May 2026</span>
+          </div>
+          <div class="actions">
+            <a href="#" class="btn btn-outline" style="opacity:.5;cursor:not-allowed">Pending</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ ABOUT ════════════════ -->
+<section id="about" class="section" style="background:var(--navy2)">
+  <div class="container">
+    <p class="section-label reveal">The Team</p>
+    <h2 class="reveal">About Us</h2>
+    <p class="reveal" style="max-width:650px;margin-top:.75rem;font-size:.95rem">
+      Final year undergraduate students at the <strong style="color:var(--text)">Sri Lanka Institute of Information Technology (SLIIT)</strong>, 
+      pursuing B.Sc. (Hons) in Information Technology. Project ID: 25_26J_393.
+    </p>
+
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <div class="team-avatar av1">J</div>
+        <h4>Jayathunga A.G.I.A.</h4>
+        <div class="team-id">IT22642950</div>
+        <div class="team-role">AI Supported Inventory and Reorder Management</div>
+        <p style="font-size:.9rem;color:var(--muted);margin:.4rem 0">Research Paper Primary Author · Adaptive Buffer Algorithm</p>
+        <div class="team-email">it22642950@my.sliit.lk</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av2">T</div>
+        <h4>Thilakarathna W.P.N.S.</h4>
+        <div class="team-id">IT22073846</div>
+        <div class="team-role">Demand Forecasting and Rule Engine</div>
+        <p style="font-size:.9rem;color:var(--muted);margin:.4rem 0">Hybrid ML + Rule-Based Forecasting · LightGBM, Prophet</p>
+        <div class="team-email">it22073846@my.sliit.lk</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av3">F</div>
+        <h4>Fernando W.G.P.N.</h4>
+        <div class="team-id">IT22261946</div>
+        <div class="team-role">Price Prediction and Supplier Recommendation</div>
+        <p style="font-size:.9rem;color:var(--muted);margin:.4rem 0">ARIMA · LSTM · AHP Supplier Ranking · Decision Support</p>
+        <div class="team-email">it22261946@my.sliit.lk</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar av4">A</div>
+        <h4>Alawaththa A.K.A.A.</h4>
+        <div class="team-id">IT22249470</div>
+        <div class="team-role">Supplier Dashboard and Demand Forecasting</div>
+        <p style="font-size:.9rem;color:var(--muted);margin:.4rem 0">Supplier Demand Forecasting · Supplier Dashboard · EOQ</p>
+        <div class="team-email">it22249470@my.sliit.lk</div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem" class="reveal">
+      <p class="section-label">Supervisors</p>
+      <div class="supervisor-row">
+        <div class="sup-card">
+          <div class="sup-icon">S</div>
+          <div class="sup-info">
+            <h4>Mr. Ravi Supunya</h4>
+            <p>Project Supervisor · Department of Information Technology, SLIIT</p>
+            <p style="margin-top:.25rem;color:var(--teal);font-size:.78rem">supunya.s@sliit.lk</p>
+          </div>
+        </div>
+        <div class="sup-card">
+          <div class="sup-icon">S</div>
+          <div class="sup-info">
+            <h4>Mrs. Chathurya Kumarapperuma</h4>
+            <p>Co-Supervisor · Department of Information Technology, SLIIT</p>
+            <p style="margin-top:.25rem;color:var(--teal);font-size:.78rem">chathurya.k@sliit.lk</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CONTACT ════════════════ -->
+<section id="contact" class="section" style="background:var(--navy)">
+  <div class="container">
+    <p class="section-label reveal">Get In Touch</p>
+    <h2 class="reveal">Contact Us</h2>
+    <div class="contact-grid reveal" style="margin-top:3rem">
+      <div class="contact-info">
+        <h3>Reach Out</h3>
+        <p>Have questions about our research? We'd love to hear from you.</p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">•</div>
+          <div class="contact-detail-text">
+            <strong>Thilakarathna W.P.N.S.</strong>
+            <p>it22073846@my.sliit.lk · 0719355359</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">•</div>
+          <div class="contact-detail-text">
+            <strong>Jayathunga A.G.I.A.</strong>
+            <p>it22642950@my.sliit.lk · 0759089188</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">•</div>
+          <div class="contact-detail-text">
+            <strong>Alawatta A.K.A.A.</strong>
+            <p>it22249470@my.sliit.lk · 0764233231 </p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">•</div>
+          <div class="contact-detail-text">
+            <strong>Fernando W.P.G.N.</strong>
+            <p>it22261946@my.sliit.lk · 0776474109 </p>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you. Your message has been recorded.');">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" placeholder="Your name" required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="name@example.com" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="topic">Topic</label>
+          <select id="topic" required>
+            <option value="" selected disabled>Select a topic</option>
+            <option value="general">General Inquiry</option>
+            <option value="research">Research Collaboration</option>
+            <option value="documents">Document Request</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Write your message" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <div class="nav-logo" style="margin-bottom:.4rem">
+        <div class="nav-logo-mark"><img src="assets/logo-v1.svg" alt="Foresto logo"/></div>
+        <div class="nav-logo-text">Foresto</div>
+      </div>
+      <p>2025–26 Research Project 25_26J_393 · SLIIT Department of Information Technology</p>
+      <p style="margin-top:.2rem">AI-Driven Demand Forecasting &amp; Waste Management System for Sri Lankan Restaurants</p>
+    </div>
+    <div class="footer-right">
+      <a href="#home">Home</a>
+      <a href="#domain">Domain</a>
+      <a href="#components">Components</a>
+      <a href="#milestones">Milestones</a>
+      <a href="#documents">Documents</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Navigation ── */
+function toggleNav(){
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('#navLinks a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
+});
+
+/* ── Active nav on scroll ── */
+const sections=['home','domain','components','milestones','documents','slides','about','contact'];
+window.addEventListener('scroll',()=>{
+  let cur='home';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && window.scrollY>=el.offsetTop-120) cur=id;
+  });
+  document.querySelectorAll('#navLinks a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+
+/* ── Reveal on scroll ── */
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1
+});
+
+document.querySelectorAll('.reveal').forEach((el, index) => {
+    el.style.transitionDelay = `${(index % 5) * 0.06}s`;
+    observer.observe(el);
+});
+
+/* ── Gantt Chart ── */
+const ganttContainer = document.getElementById('gantt-chart-container');
+
+const months = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'];
+
+const tasks = [
+    { label: 'Topic Selection', start: 0, end: 1, color: '#4b5563' },
+    { label: 'Requirements Gathering', start: 1, end: 3, color: '#6b7280' },
+    { label: 'Project Proposal Document', start: 2, end: 4, color: '#374151' },
+    { label: 'System Design', start: 4, end: 6, color: '#4b5563' },
+    { label: 'Implementation', start: 4, end: 8, color: '#6b7280' },
+    { label: 'Progress Presentation 1', start: 6, end: 6, color: '#374151' },
+    { label: 'Research Paper', start: 7, end: 9, color: '#4b5563' },
+    { label: 'Testing', start: 8, end: 10, color: '#6b7280' },
+    { label: 'Final Report', start: 10, end: 11, color: '#374151' },
+    { label: 'Progress Presentation 2', start: 10, end: 10, color: '#4b5563' },
+    { label: 'Logbook & Website', start: 10, end: 11, color: '#6b7280' },
+    { label: 'Final Presentation', start: 11, end: 11, color: '#1f2937' }
+];
+
+function createGanttChart() {
+    if (!ganttContainer) return;
+
+    ganttContainer.style.fontFamily = "'Poppins', sans-serif";
+
+    // Create Header
+    const header = document.createElement('div');
+    header.style.display = 'grid';
+    header.style.gridTemplateColumns = `200px repeat(${months.length}, 1fr)`;
+    header.style.gap = '2px';
+    header.style.paddingBottom = '8px';
+    header.style.borderBottom = '1px solid #d1d5db';
+    header.style.marginBottom = '8px';
+
+    const emptyHeader = document.createElement('div');
+    header.appendChild(emptyHeader);
+
+    months.forEach(month => {
+        const monthEl = document.createElement('div');
+        monthEl.textContent = month;
+        monthEl.style.textAlign = 'center';
+        monthEl.style.fontSize = '0.7rem';
+        monthEl.style.fontWeight = '600';
+        monthEl.style.color = '#4b5563';
+        header.appendChild(monthEl);
+    });
+
+    ganttContainer.appendChild(header);
+
+    // Create Task Rows
+    tasks.forEach(task => {
+        const row = document.createElement('div');
+        row.style.display = 'grid';
+        row.style.gridTemplateColumns = `200px repeat(${months.length}, 1fr)`;
+        row.style.gap = '2px';
+        row.style.marginBottom = '6px';
+        row.style.alignItems = 'center';
+
+        const label = document.createElement('div');
+        label.textContent = task.label;
+        label.style.fontSize = '0.78rem';
+        label.style.color = '#374151';
+        label.style.whiteSpace = 'nowrap';
+        label.style.overflow = 'hidden';
+        label.style.textOverflow = 'ellipsis';
+        label.style.paddingRight = '10px';
+        row.appendChild(label);
+
+        for (let i = 0; i < months.length; i++) {
+            const cell = document.createElement('div');
+            cell.style.height = '20px';
+            cell.style.borderRadius = '3px';
+            
+            if (i >= task.start && i <= task.end) {
+                cell.style.background = task.color;
+                cell.setAttribute('title', task.label); // Tooltip for accessibility
+            } else {
+                cell.style.background = '#f3f4f6';
+            }
+            row.appendChild(cell);
+        }
+        ganttContainer.appendChild(row);
+    });
+}
+
+createGanttChart();
+
+
+
+/* ── Smooth section reveal stagger ── */
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+  el.style.transitionDelay=(i%6)*0.05+'s';
+});
+</script>
+</body>
+</html>
